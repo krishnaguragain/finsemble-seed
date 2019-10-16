@@ -58,11 +58,17 @@
     "fileName": "ChartIQ-local-installer",
     "appAssets": [
         {
-            "src": "https://assets.finsemble.com/assimilation/assimilation_3.12.0.0.zip",
-            "version": "3.12.0.0",
+            "src": "https://assets.finsemble.com/assimilation/assimilation_3.11.0.0.zip",
+            "version": "3.11.0.0",
             "alias": "assimilation",
             "target": "AssimilationMain.exe"
-        }
+        },
+        {
+			"src": "http://localhost:3375/assets/winFormExample/winFormExample.zip",
+			"version": "0.0.1",
+			"alias": "winformalias",
+			"target": "WinformExample"
+		}
     ],
     "finsemble": {
         "applicationRoot": "http://localhost:3375",

@@ -1,0 +1,76 @@
+{
+	"components": {
+		"Test1": {
+			"window": {
+			  "url": "$applicationRoot/components/winFormExample/index.html",
+			  "frame": false,
+			  "resizable": true,
+			  "autoShow": true,
+			  "top": "top",
+			  "left": "left",
+			  "width": 400,
+			  "height": 300
+			},
+			"component": {
+			  "preload": false
+			}, 
+			"foreign": {
+			  "services": {
+				"dockingService": {
+				  "canGroup": true,
+				  "isArrangable": true
+				}
+			  },
+			  "components": {
+				"App Launcher": {
+				  "launchableByUser": true
+				},
+				"Window Manager": {
+				  "title": "Test",
+				  "FSBLHeader": true,
+				  "persistWindowState": true,
+				  "showLinker": true
+				},
+				"Toolbar": {
+				  "iconClass": "test"
+				}
+			  }
+			}
+		  },
+		"Winform Example Assimilation": {
+			"window": {
+				"alias": "winformalias",
+				"id": "winformexample",
+				"//path": "C:\\projects\\finsemble\\finsemble-dll\\WinformExample\\bin\\Release\\WinformExample",
+				"resizable": true,
+				"autoShow": true,
+				"top": "center",
+				"left": "center",
+				"width": 400,
+				"height": 300,
+				"windowType": "assimilation"
+			},
+			"foreign": {
+				"services": {
+					"dockingService": {
+						"canGroup": true,
+						"isArrangable": true
+					}
+				},
+				"components": {
+					"App Launcher": {
+						"launchableByUser": true
+					},
+					"Window Manager": {
+						"title": "Winform Title",
+						"persistWindowState": true,
+						"showLinker": true
+					},
+					"Toolbar": {
+						
+					}
+				}
+			}
+		}
+	}
+}

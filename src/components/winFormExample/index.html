@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>spawnWinformExample</title>
+  </head>
+
+  <body>
+    <h1>Test</h1>
+    <p>
+      <input id="value" value="test1" />
+      <button id="spawn">Spawn Winform</button>
+      <button id="publish">publish</button>
+    </p>
+  </body>
+
+  <script>
+    if (window.FSBL && FSBL.addEventListener) {
+      FSBL.addEventListener("onReady", FSBLReady);
+    } else {
+      window.addEventListener("FSBLReady", FSBLReady);
+    }
+
+    function FSBLReady() {
+      document.querySelector("#spawn").addEventListener("click", spawn);
+      document.querySelector("#publish").addEventListener("click", publish);
+
+      FSBL.Clients.RouterClient.addPubSubResponder(
+        "symbol",
+        {
+          State: "start"
+        },
+        {}
+      );
+    }
+
+    function spawn() {
+      FSBL.Clients.LauncherClient.spawn(
+        "Winform Example Assimilation",
+        {
+          addToWorkspace: true,
+          left: "adjacent",
+          spawnIfNotFound: true,
+          data: {}
+        },
+        function(err, response) {
+          if (!err) {
+            publish()
+          }
+        }
+      );
+    }
+
+    function publish() {
+      FSBL.Clients.RouterClient.publish("symbol", {
+        symbol: document.getElementById("value").value
+      });
+    }
+  </script>
+</html>
