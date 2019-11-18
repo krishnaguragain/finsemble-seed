@@ -24,7 +24,13 @@
         "finsemble-cli": "finsemble-cli",
         "tslint": "./node_modules/tslint/bin/tslint -c tslint.json src-built-in/**/*.ts",
         "tslint:fix": "./node_modules/tslint/bin/tslint -c tslint.json src-built-in/**/*.ts --fix",
-        "migrate": "node migration/2.3/migrationScripts/migrate.js"
+        "migrate": "node migration/2.3/migrationScripts/migrate.js",
+        "pack": "gulp buildWebpack --gulpfile=./gulpfile.js",
+        "pack-watch": "nodemon --config nodemon.config.json --exec npm run pack",
+        "setEnv": "set NODE_ENV=development",
+        "FEA": "./node_modules/.bin/electron ./node_modules/@chartiq/finsemble-electron-adapter/startup/devIndex.js --remote-debugging-port=9090 --inspect=5858 --manifest http://localhost:3375/configs/openfin/manifest-local.json",
+        "serverJS": "node ./server/server.js",
+        "start": "npm-run-all --sequential setEnv pack --parallel serverJS FEA pack-watch"
     },
     "author": "",
     "license": "",
@@ -70,6 +76,8 @@
         "gulp-watch": "5.0.1",
         "hard-source-webpack-plugin": "0.6.12",
         "merge-stream": "1.0.1",
+        "nodemon": "^1.19.4",
+        "npm-run-all": "^4.1.5",
         "querystring": "0.2.0",
         "react": "16.8.4",
         "react-dom": "16.8.4",

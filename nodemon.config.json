@@ -1,0 +1,13 @@
+{
+	"verbose": false,
+	"ignore": [
+		".git",
+		"node_modules/**/node_modules",
+		".babel_cache/*",
+		"dist/*",
+		"finsemble/*",
+		".webpack-file-cache/*",
+		"build/webpack/vendor-manifest.json"
+	],
+	"ext": "js,json,css,jsx,tsx,ts,html"
+}
