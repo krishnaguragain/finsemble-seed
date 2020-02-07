@@ -1,7 +1,7 @@
 ## Spawning a tabbed window of Components into your Workspace ##
 You may wish to spawn a group of components into a single tabbed window. This is recipe demonstrates how to achieve that with the Finsemble LauncherClient API.
 
-![](./spawn_component_group_demo.gif)
+![](./spawnTabbedGroups.gif)
 
 ### Spawning a tabbed group ###
 [spawnTabbedGroup.js](./spawnTabbedGroup.js) provides a utility function that allows you to spawn a group of components, group them intoa tabbed window and (optionally) add them to a common linker channel. This is achieved by providing an array of String componentTypes to spawn and a set of spawn parameters to position the tabbed window. 
