@@ -1,6 +1,6 @@
 {
-    "launchGroupSpawner": {
-        "output": "components/launchGroupSpawner/launchGroupSpawner",
-        "entry": "./src/components/launchGroupSpawner/launchGroupSpawner.js"
+    "tabbedGroupSpawner": {
+        "output": "components/tabbedGroupSpawner/tabbedGroupSpawner",
+        "entry": "./src/components/tabbedGroupSpawner/tabbedGroupSpawner.js"
     }
 }

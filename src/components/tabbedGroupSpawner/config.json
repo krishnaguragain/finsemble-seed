@@ -1,0 +1,37 @@
+{
+    "comment": "Sample spawnComponentGroup usage via spawner components that can be added to your Launcher menu",
+    "components": {
+        "tabbedGroupSpawnerExample": {
+            "window": {
+                "url": "$applicationRoot/components/tabbedGroupSpawner/tabbedGroupSpawner.html",
+                "options": {
+                    "resizable": true,
+                    "autoShow": false,
+                    "alwaysOnTop": false
+                },
+                "top": 100,
+                "left": 300,
+                "width": 800,
+                "height": 600,
+				"addToWorkspace": false,
+                "data": {
+                    "linkerGroup": "auto",
+                    "toSpawn": ["Welcome Component","Welcome Component","Welcome Component"] 
+                }
+            },
+            "component": {},
+            "foreign": {
+                "components": {
+                    "App Launcher": {
+                        "launchableByUser": true
+                    },
+                    "Window Manager": {},
+                    "Toolbar": {
+                        "iconClass": "tabbedGroupSpawner",
+                        "iconURL": "http://localhost:3375/assets/img/Finsemble_Taskbar_Icon.png"
+                    }
+                }
+            }
+		}
+    }
+}

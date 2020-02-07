@@ -162,6 +162,6 @@
 		"$applicationRoot/configs/application/workspaceTemplates.json",
 		"$applicationRoot/configs/application/services.json",
 		"$applicationRoot/configs/application/securityPolicies.json",
-		"$applicationRoot/components/launchGroupSpawner/config.json"
+		"$applicationRoot/components/tabbedGroupSpawner/config.json"
 	]
 }
