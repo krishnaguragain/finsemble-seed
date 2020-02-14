@@ -41,7 +41,7 @@
 			"window": {
 				"alias": "winformalias",
 				"id": "winformexample",
-				"//path": "C:\\projects\\finsemble\\finsemble-dll\\WinformExample\\bin\\Release\\WinformExample",
+				"//path": "C:\\projects\\finsemble\\finsemble-dll\\WinformExample\\bin\\Debug\\WinformExample",
 				"resizable": true,
 				"autoShow": true,
 				"top": "center",
@@ -63,6 +63,75 @@
 					},
 					"Window Manager": {
 						"title": "Winform Title",
+						"persistWindowState": true,
+						"showLinker": true
+					},
+					"Toolbar": {
+						
+					}
+				}
+			}
+		},
+		"Winform Example Native": {
+			"window": {
+				"//alias": "winformalias",
+				"id": "winformexample",
+				"path": "C:\\projects\\finsemble\\finsemble-dll\\WinformExample\\bin\\Debug\\WinformExample",
+				"resizable": true,
+				"autoShow": true,
+				"top": "center",
+				"left": "center",
+				"width": 400,
+				"height": 300,
+				"windowType": "native"
+			},
+			"foreign": {
+				"services": {
+					"dockingService": {
+						"canGroup": true,
+						"isArrangable": true
+					}
+				},
+				"components": {
+					"App Launcher": {
+						"launchableByUser": true
+					},
+					"Window Manager": {
+						"title": "Winform Title",
+						"persistWindowState": true,
+						"showLinker": true
+					},
+					"Toolbar": {
+						
+					}
+				}
+			}
+		},
+		"WPF Example Native": {
+			"window": {
+				"id": "wpfexample",
+				"path": "C:\\projects\\finsemble\\finsemble-dll\\WPFExample\\bin\\Debug\\WPFExample",
+				"resizable": true,
+				"autoShow": true,
+				"top": "center",
+				"left": "center",
+				"width": 400,
+				"height": 300,
+				"windowType": "native"
+			},
+			"foreign": {
+				"services": {
+					"dockingService": {
+						"canGroup": true,
+						"isArrangable": true
+					}
+				},
+				"components": {
+					"App Launcher": {
+						"launchableByUser": true
+					},
+					"Window Manager": {
+						"title": "Wpf Title",
 						"persistWindowState": true,
 						"showLinker": true
 					},
