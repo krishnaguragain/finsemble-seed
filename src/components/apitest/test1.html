@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<meta name="description" content="" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" type="text/css" href="test.css" />
+		<script src="test1View.js"></script>
+		<script src="test1Controller.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+		<script>
+			function openTab(evt, tabName) {
+			  var i, tabcontent, tablinks;
+			  tabcontent = document.getElementsByClassName("tabcontent");
+			  for (i = 0; i < tabcontent.length; i++) {
+				tabcontent[i].style.display = "none";
+			  }
+			  tablinks = document.getElementsByClassName("tablinks");
+			  for (i = 0; i < tablinks.length; i++) {
+				tablinks[i].className = tablinks[i].className.replace(" active", "");
+			  }
+			  document.getElementById(tabName).style.display = "block";
+			  evt.currentTarget.className += " active";
+			}
+		  </script>
+	</head>
+
+	<body>
+		<div id='inputSection1'>
+			<br/>
+			<label for="symbolInput" id="symbolLabel">Input a value for testing</label>
+			<input type='text' draggable="true" id='symbolInput'/>
+			<br/>
+		</div>
+		<div class='tab'>
+			<button class="tablinks" onclick="openTab(event, 'DistributedStore')" id='dsBtn'>Distributed Store</button>
+			<button class="tablinks" onclick="openTab(event, 'Hotkeys')">Hotkeys</button>
+			<button class="tablinks" onclick="openTab(event, 'Launcher')">Launcher</button>
+			<button class="tablinks" onclick="openTab(event, 'Linker')">Linker</button>
+			<button class="tablinks" onclick="openTab(event, 'Logger')">Logger</button>
+			<button class="tablinks" onclick="openTab(event, 'Notification')">Notification</button>
+			<button class="tablinks" onclick="openTab(event, 'Router')">Router</button>
+			<button class="tablinks" onclick="openTab(event, 'Search')">Search</button>
+			<button class="tablinks" onclick="openTab(event, 'Storage')">Storage</button>
+			<button class="tablinks" onclick="openTab(event, 'Windows')">Windows and UI</button>
+			<button class="tablinks" onclick="openTab(event, 'Dialog')">Dialog</button>
+			<button class="tablinks" onclick="openTab(event, 'Workspace')">Workspace</button>
+		</div>
+		<div id='DistributedStore' class='tabcontent'>
+			<h3>Testing function for Distributed Store</h3>
+			<h4>Please test using the buttons with sequence from top to bottom.</h4>
+		</div>
+		<div id='DragandDrop' class='tabcontent'>
+			<h3>Testing function for Drag and Drop</h3>
+		</div>
+		<div id='Hotkeys' class='tabcontent'>
+			<h3>Testing function for Hotkeys</h3>
+		</div>
+		<div id='Launcher' class='tabcontent'>
+			<h3>Testing function for Launcher</h3>
+		</div>
+		<div id='Linker' class='tabcontent'>
+			<h3>Testing function for Linker</h3>
+		</div>
+		<div id='Logger' class='tabcontent'>
+			<h3>Testing function for Logger</h3>
+			<h4>Please use the central logger to see the testing result.</h4>
+			<h5>Please enable all the type of log messages.</h5>
+			<h5>Please filter the log messages by "APITEST_LOGGER_MSG".</h5>
+		</div>
+		<div id='Notification' class='tabcontent'>
+			<h3>Testing function for Notification</h3>
+		</div>
+		<div id='Router' class='tabcontent'>
+			<h3>Testing function for Router</h3>
+			<h4>Please use "API Test 2" Component together for testing.</h4>
+		</div>
+		<div id='Search' class='tabcontent'>
+			<h3>Testing function for Search</h3>
+		</div>
+		<div id='Storage' class='tabcontent'>
+			<h3>Testing function for Storage</h3>
+		</div>
+		<div id='Windows' class='tabcontent'>
+			<h3>Testing function for Windows and UI</h3>
+		</div>
+		<div id='Dialog' class='tabcontent'>
+			<h3>Testing function for Dialog</h3>
+		</div>
+		<div id='Workspace' class='tabcontent'>
+			<h3>Testing function for Workspace</h3>
+		</div>
+		<div>
+			<textarea id='displayMsg1' readonly></textarea>
+		</div>
+	</body>
+</html>

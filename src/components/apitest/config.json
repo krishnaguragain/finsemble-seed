@@ -1,0 +1,81 @@
+{
+	"components": {
+    "API Test 1": {
+      "window": {
+        "url": "$applicationRoot/components/apitest/test1.html",
+        "frame": false,
+        "resizable": true,
+        "autoShow": true,
+        "top": "top",
+        "left": "left",
+        "width": 925,
+        "height": "100%"
+      },
+      "component": {
+        "preload": false,
+        "category": "test"
+      }, 
+      "foreign": {
+        "services": {
+          "dockingService": {
+            "canGroup": true,
+            "isArrangable": true
+          }
+        },
+        "components": {
+          "App Launcher": {
+            "launchableByUser": true
+          },
+          "Window Manager": {
+            "title": "API Testing 1",
+            "FSBLHeader": true,
+            "persistWindowState": true,
+            "showLinker": true
+          },
+          "Toolbar": {
+            "iconClass": "test"
+          }
+        }
+      }
+    },
+    "API Test 2": {
+      "window": {
+        "url": "$applicationRoot/components/apitest/test2.html",
+        "frame": false,
+        "resizable": true,
+        "autoShow": true,
+        "top": "top",
+        "right": "right",
+        "width": 525,
+        "height": "100%"
+      },
+      "component": {
+        "preload": false,
+        "category": "test",
+        "advertiseReceivers":"symbol"
+      },
+      "foreign": {
+        "services": {
+          "dockingService": {
+            "canGroup": true,
+            "isArrangable": true
+          }
+        },
+        "components": {
+          "App Launcher": {
+            "launchableByUser": true
+          },
+          "Window Manager": {
+            "title": "API Testing 2",
+            "FSBLHeader": true,
+            "persistWindowState": true,
+            "showLinker": true
+          },
+          "Toolbar": {
+            "iconClass": "test"
+          }
+        }
+      }
+    }
+  }
+}
