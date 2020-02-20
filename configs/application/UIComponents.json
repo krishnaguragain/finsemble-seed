@@ -609,7 +609,8 @@
 						"allowAutoArrange": false,
 						"allSnapping": true,
 						"allowTiling": false,
-						"allowTabbing": false
+						"allowTabbing": false,
+						"manageWindowMovement": true 
 					},
 					"workspaceService": {
 						"global": true
