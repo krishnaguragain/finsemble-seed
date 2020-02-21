@@ -37,44 +37,8 @@
 			  }
 			}
 		  },
-		"Winform Example Assimilation": {
-			"window": {
-				"alias": "winformalias",
-				"id": "winformexample",
-				"//path": "C:\\projects\\finsemble\\finsemble-dll\\WinformExample\\bin\\Debug\\WinformExample",
-				"resizable": true,
-				"autoShow": true,
-				"top": "center",
-				"left": "center",
-				"width": 400,
-				"height": 300,
-				"windowType": "assimilation"
-			},
-			"foreign": {
-				"services": {
-					"dockingService": {
-						"canGroup": true,
-						"isArrangable": true
-					}
-				},
-				"components": {
-					"App Launcher": {
-						"launchableByUser": true
-					},
-					"Window Manager": {
-						"title": "Winform Title",
-						"persistWindowState": true,
-						"showLinker": true
-					},
-					"Toolbar": {
-						
-					}
-				}
-			}
-		},
 		"Winform Example Native": {
 			"window": {
-				"//alias": "winformalias",
 				"id": "winformexample",
 				"path": "C:\\projects\\finsemble\\finsemble-dll\\WinformExample\\bin\\Debug\\WinformExample",
 				"resizable": true,

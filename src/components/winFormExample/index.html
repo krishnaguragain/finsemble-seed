@@ -8,8 +8,11 @@
   <body>
     <h1>Test</h1>
     <p>
+      <button id="spawnWinformNative">Spawn Winform Native</button>
+      <button id="spawnWpfNative">Spawn WPF Native</button>
+    </p>
+    <p>
       <input id="value" value="test1" />
-      <button id="spawn">Spawn Winform</button>
       <button id="publish">publish</button>
     </p>
   </body>
@@ -22,10 +25,11 @@
     }
 
     function FSBLReady() {
-      document.querySelector("#spawn").addEventListener("click", spawn);
+      document.querySelector("#spawnWinformNative").addEventListener("click", spawnWinformNative);
+      document.querySelector("#spawnWpfNative").addEventListener("click", spawnWpfNative);
       document.querySelector("#publish").addEventListener("click", publish);
       FSBL.Clients.RouterClient.addPubSubResponder(
-        "symbol",
+        "Finsemble.TestWPFPubSubSymbol",
         {
           State: "start"
         },
@@ -33,7 +37,21 @@
       ); 
     }
 
-    function spawn() {
+    function spawnWpfNative() {
+      FSBL.Clients.LauncherClient.spawn(
+        "WPF Example Native",
+        {
+          left: "adjacent",
+          data: "test1234",
+          addToWorkspace: true
+        },
+        function(err, response) {
+          if (!err) {}
+        }
+      );
+    }
+
+    function spawnWinformNative() {
       FSBL.Clients.LauncherClient.spawn(
         "Winform Example Native",
         {
@@ -48,7 +66,7 @@
     }
 
     function publish() {
-      FSBL.Clients.RouterClient.publish("symbol", {
+      FSBL.Clients.RouterClient.publish("Finsemble.TestWPFPubSubSymbol", {
         symbol: document.getElementById("value").value
       });
     }
