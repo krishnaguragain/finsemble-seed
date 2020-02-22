@@ -14,7 +14,7 @@
 				"height": 432
 			},
 			"component": {
-				"displayName": "Welcome Component",
+				"displayName": "Welcome Component (display name)",
 				"spawnOnStartup": false,
 				"preload": "$applicationRoot/preloads/zoom.js"
 			},
@@ -35,7 +35,7 @@
 						"showLinker": true,
 						"FSBLHeader": true,
 						"persistWindowState": true,
-						"title": "Welcome to Finsemble"
+						"title": "Welcome to Finsemble (window title)"
 					},
 					"Toolbar": {
 						"iconClass": "ff-component"

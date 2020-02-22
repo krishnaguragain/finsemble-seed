@@ -607,7 +607,7 @@
 				"services": {
 					"windowService": {
 						"allowAutoArrange": false,
-						"allSnapping": true,
+						"allowSnapping": true,
 						"allowTiling": false,
 						"allowTabbing": false,
 						"manageWindowMovement": true 
