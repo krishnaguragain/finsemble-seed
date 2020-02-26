@@ -5,9 +5,11 @@ import { ReactComponent as DragHandleIcon } from '../../../../assets/img/toolbar
 const DragHandle = () => {
 	const handleMouseDown = (event) => {
 		FSBL.Clients.WindowClient.startMovingWindow(event);
+		console.log("Called WindowClient.startMovingWindow");
 	};
 	const handleMouseUp = () => {
 		FSBL.Clients.WindowClient.stopMovingWindow();
+		console.log("Called WindowClient.stopMovingWindow");
 	};
 
 	return (
