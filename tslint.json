@@ -1,4 +1,3 @@
 {
-	"extends": "@chartiq/tslint-config-chartiq-base",
-	"ter-no-tabs": true
+	"extends": "@chartiq/tslint-config-chartiq-base"
 }
