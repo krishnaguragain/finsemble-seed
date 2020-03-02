@@ -1,1 +1,6 @@
-{}
+{
+    "ReactTsx": {
+        "output": "components/ReactTsx/ReactTsx",
+        "entry": "./src/components/ReactTsx/src/app.tsx"
+    }
+}
