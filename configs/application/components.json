@@ -35,7 +35,8 @@
 						"showLinker": true,
 						"FSBLHeader": true,
 						"persistWindowState": true,
-						"title": "Welcome to Finsemble"
+						"title": "Welcome to Finsemble",
+						"extraButtonExample": true
 					},
 					"Toolbar": {
 						"iconClass": "ff-component"

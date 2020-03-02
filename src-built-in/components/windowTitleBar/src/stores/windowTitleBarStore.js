@@ -43,7 +43,7 @@ var Actions = {
 				{ field: "Maximize.hide", value: max },
 				{ field: "Minimize.hide", value: FSBLHeader.hideMinimize ? true : false },
 				{ field: "Close.hide", value: FSBLHeader.hideClose ? true : false },
-				{ field: "AlwaysOnTop.show", value: FSBLHeader.alwaysOnTop ? true : false },
+				{ field: "AlwaysOnTop.show", value: FSBLHeader.alwaysOnTop ? true : false }
 			]);
 
 
@@ -175,8 +175,17 @@ var Actions = {
 			let alwaysOnTopIcon = globalWindowManagerConfig.alwaysOnTopIcon;
 			if (windowTitleBarConfig.alwaysOnTopIcon === false || windowTitleBarConfig.alwaysOnTopIcon === true)
 				alwaysOnTopIcon = windowTitleBarConfig.alwaysOnTopIcon;
-
 			windowTitleBarStore.setValues([{ field: "AlwaysOnTop.show", value: alwaysOnTopIcon }]);
+
+
+
+			// Whether the extraButtonExample shows or not depends on the global setting (finsemble["Window Manager"].extraButtonExample) and then
+			// on the specific setting for this component (foreign.components["Window Manager"].extraButtonExample)
+			let extraButtonExample = globalWindowManagerConfig.extraButtonExample;
+			if (windowTitleBarConfig.extraButtonExample === false || windowTitleBarConfig.extraButtonExample === true)
+				extraButtonExample = windowTitleBarConfig.extraButtonExample;
+			windowTitleBarStore.setValues([{ field: "ExtraButtonExample.show", value: extraButtonExample }]);
+
 
 
 			//If tabbing is turned off, ignore global/local 'windowManager' config about whether to allow tabbing.
