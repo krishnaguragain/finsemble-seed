@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { Action as ReactTsxActions } from '../stores/ReactTsxStore';
 
 export interface ReactTsxComponentProps { title: string;}
 

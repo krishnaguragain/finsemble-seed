@@ -1,6 +1,5 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { Store as ReactTsxStore } from './stores/ReactTsxStore';
 import ReactTsxComponent from './components/ReactTsxComponent';
 
 class ReactTsx extends React.Component {
@@ -8,12 +7,10 @@ class ReactTsx extends React.Component {
 		let self = this;
 		return (
 		<div>
-			<ReactTsxComponent title='test' />
+			<ReactTsxComponent title='test'/>
 		</div>)
 	}
 };
-// for debugging.
-window.ReactTsxStore = ReactTsxStore;
 
 // render component when FSBL is ready.
 const FSBLReady = () => {
