@@ -169,8 +169,7 @@ class VersionCheckService extends Finsemble.baseService {
 			this.getFinsembleVersion((fsblVersion) => {
 				this.startUpFSBLVersion = fsblVersion;
 
-				const self = this;
-				setInterval(() => self.getFinsembleVersion(self.compareVersions), this.updatePeriod);
+				setInterval(() => this.getFinsembleVersion(this.compareVersions), this.updatePeriod);
 			});
 		};
 
