@@ -1,0 +1,12 @@
+{
+    "comment": "Houses config for any custom services that you'd like to import into Finsemble.",
+    "services": {
+        "versionCheckService": {
+            "useWindow": true,
+            "active": true,
+            "name": "versionCheckService",
+            "visible": false,
+            "html": "$applicationRoot/services/versionCheck/versionCheck.html"
+        }
+    }
+}
