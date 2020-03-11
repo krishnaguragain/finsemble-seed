@@ -5,8 +5,8 @@ Finsemble.Clients.Logger.log("versionCheck Service starting up");
 
 // Add and initialize any other clients you need to use (services are initialized by the system, clients are not):
 // Finsemble.Clients.AuthenticationClient.initialize();
-// Finsemble.Clients.ConfigClient.initialize();
-// Finsemble.Clients.DialogManager.initialize();
+Finsemble.Clients.ConfigClient.initialize();
+Finsemble.Clients.DialogManager.initialize();
 // Finsemble.Clients.DistributedStoreClient.initialize();
 // Finsemble.Clients.DragAndDropClient.initialize();
 // Finsemble.Clients.LauncherClient.initialize();
@@ -22,7 +22,7 @@ Finsemble.Clients.Logger.log("versionCheck Service starting up");
 /**
  * TODO: Add service description here
  */
-class versionCheckService extends Finsemble.baseService {
+class VersionCheckService extends Finsemble.baseService {
 	/**
 	 * Initializes a new instance of the versionCheckService class.
 	 */
@@ -49,8 +49,8 @@ class versionCheckService extends Finsemble.baseService {
 				// service to startup.
 				clients: [
 					// "authenticationClient",
-					// "configClient",
-					// "dialogManager",
+					"configClient",
+					"dialogManager",
 					// "distributedStoreClient",
 					// "dragAndDropClient",
 					// "hotkeyClient",
@@ -64,6 +64,15 @@ class versionCheckService extends Finsemble.baseService {
 			}
 		});
 
+		// Initialize initialize variables
+		this.startUpFSBLVersion = "";
+		this.configURL = "";
+		this.updatePeriod = Number.MAX_SAFE_INTEGER;
+
+		// Bind functions to this for callbacks
+		this.compareVersions.bind(this);
+		this.getFinsembleVersion.bind(this);
+		this.startVersionCheck.bind(this);
 		this.readyHandler = this.readyHandler.bind(this);
 
 		this.onBaseServiceReady(this.readyHandler);
@@ -74,44 +83,102 @@ class versionCheckService extends Finsemble.baseService {
 	 * @param {function} callback
 	 */
 	readyHandler(callback) {
-		this.createRouterEndpoints();
-		Finsemble.Clients.Logger.log("versionCheck Service ready");
+		this.startVersionCheck();
+		Finsemble.Clients.Logger.log("Finsemble Version Check Service ready");
 		callback();
 	}
+	/**
+			 * Compares Finsemble version with startup version and notifies user if they are different.
+			 * 
+			 * @param fsblVersionA The first version to compare
+			 * @param fsblVersionB The second version to compare
+			 */
+	compareVersions(fsblVersionA, fsblVersionB) {
+		if (fsblVersionA !== fsblVersionB) {
+			const dialogHandler = (err, response) => {
+				if (err) {
+					console.error(err);
+					return;
+				}
 
-	// Implement service functionality
-	myFunction(data) {
-		return `Data passed into query: \n${JSON.stringify(data, null, "\t")}`;
+				if (response.choice === "cancel") {
+					//
+				} else {
+					//If we get here, they clicked "Restart Now", so we obey the user.
+					Finsemble.Clients.RouterClient.transmit("Application.restart");
+				}
+			};
+
+			const params = {
+				monitor: "primary",
+				question: "The application will restart in one minute. Your workspace will be saved.",
+				showTimer: true,
+				timerDuration: 60000,
+				showNegativeButton: false,
+				affirmativeDialogManResponseLabel: "Restart Now"
+			};
+
+			// Version changed since startup, notify user.
+			Finsemble.Clients.DialogManager.open("yesNo", params, dialogHandler);
+		}
 	}
 
 	/**
-	 * Creates a router endpoint for you service.
-	 * Add query responders, listeners or pub/sub topic as appropriate.
+	 * Gets the Finsemble version from the server.
+	 * 
+	 * @param cb Callback function used to return the Finsemble version with it is fetched.
 	 */
-	createRouterEndpoints() {
-		// Add responder for myFunction
-		Finsemble.Clients.RouterClient.addResponder("versionCheck.myFunction", (err, message) => {
+	getFinsembleVersion(cb) {
+		// Version copied here because of this scope
+		const fsblVersion = this.startUpFSBLVersion;
+		fetch(this.configURL)
+			.then((res) => res.json())
+			.then(config => cb(config.system.FSBLVersion, fsblVersion));
+	}
+
+	/**
+	 * Creates a router endpoint for you service. 
+	 * Add query responders, listeners or pub/sub topic as appropriate. 
+	 */
+	startVersionCheck() {
+		const processConfig = (err, info) => {
 			if (err) {
-				return Finsemble.Clients.Logger.error("Failed to setup versionCheck.myFunction responder", err);
+				Finsemble.Clients.Logger.error(err);
+				return;
 			}
 
-			Finsemble.Clients.Logger.log('versionCheck Query: ' + JSON.stringify(message));
+			// Set default configuration
+			this.configURL = `${info.applicationRoot}/finsemble/configs/core/config.json`;
+			this.updatePeriod = 60 * 1000;
 
-			try {
-				// Data in query message can be passed as parameters to a method in the service.
-				const data = this.myFunction(message.data);
+			if (info.FSBLVersionChecking) {
+				// Version checking config exists
+				if (info.FSBLVersionChecking.updatePeriod) {
+					this.updatePeriod = info.FSBLVersionChecking.updatePeriod;
+				}
 
-				// Send query response to the function call, with optional data, back to the caller.
-				message.sendQueryResponse(null, data);
-			} catch (e) {
-				// If there is an error, send it back to the caller
-				message.sendQueryResponse(e);
+				if (info.FSBLVersionChecking.configURL) {
+					this.configURL = info.FSBLVersionChecking.configURL;
+				}
 			}
-		});
+
+			Finsemble.Clients.Logger.log(
+				`Using:\n\tURL:${this.configURL}\n\tUpdate period (ms): ${this.updatePeriod}`);
+
+			// Get version at startup
+			this.getFinsembleVersion((fsblVersion) => {
+				this.startUpFSBLVersion = fsblVersion;
+
+				const self = this;
+				setInterval(() => self.getFinsembleVersion(self.compareVersions), this.updatePeriod);
+			});
+		};
+
+		Finsemble.Clients.ConfigClient.getValue({ field: "finsemble" }, processConfig);
 	}
 }
 
-const serviceInstance = new versionCheckService();
+const serviceInstance = new VersionCheckService();
 
 serviceInstance.start();
 module.exports = serviceInstance;
