@@ -1,0 +1,51 @@
+/***********************************************************************************************************************
+	Copyright 2017-2020 by ChartIQ, Inc.
+	Licensed under the ChartIQ, Inc. Developer License Agreement https://www.chartiq.com/developer-license-agreement
+ **********************************************************************************************************************/
+body{
+    font-family: "Open Sans", sans-serif;
+}
+
+.button-wrapper{
+    text-align: center;
+    padding-top: 50px;
+}
+
+div.dialog-title{
+    text-align: center;
+    color: whitesmoke;
+    font-weight: 600;
+    font-size: 18pt;
+}
+
+div.dialog-question{
+    padding-top: 50px;
+    text-align: center;
+    color: whitesmoke;
+    font-weight: 400;
+    font-size: 14pt;
+    word-wrap: break-word;
+}
+
+.flexBox{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: calc(91vh + 1px);
+    background: #1c2a33;
+}
+
+button.finsemble-button{
+    background: #4495d1;
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 10px 40px 10px 40px;
+    font-size: 12pt;
+    font-weight: 400;
+}
+
+button.finsemble-button:hover{
+    transition: all .2s ease;
+    background: #1c70b9;
+}

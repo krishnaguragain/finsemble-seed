@@ -81,7 +81,8 @@
             }
         },
         "importConfig": [
-            "$applicationRoot/configs/application/config.json"
+            "$applicationRoot/configs/application/config.json",
+            "$applicationRoot/components/linker-tester/config.json"
         ],
         "router": {
             "crossDomainTransport": "IPCBus",

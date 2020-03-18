@@ -1,0 +1,137 @@
+/***********************************************************************************************************************
+	Copyright 2017-2020 by ChartIQ, Inc.
+	Licensed under the ChartIQ, Inc. Developer License Agreement https://www.chartiq.com/developer-license-agreement
+ **********************************************************************************************************************/
+ body {
+	margin: 0px;
+	font-family: "Open Sans", sans-serif;
+}
+
+.container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding: 5px;
+	background: rgb(21, 31, 40);
+	color: #CBD8E1;
+}
+
+h1 {
+	font-weight: 500;
+	color: #4495d1;
+}
+
+button {
+	background-color: #4495d1;
+	font-family: "Open Sans", sans-serif;
+	font-weight: 400;
+	border: 0px;
+	border-radius: 5px;
+	padding: 5px 10px;
+	transition: all .2s ease;
+	margin-top: 2px;
+	color: #CBD8E1;
+}
+
+#clear{
+	background-color: #d93025;
+}
+
+#clear:hover{
+	background-color: #ff4949;
+}
+
+button:hover {
+	background-color:#68a5d2;
+	cursor: pointer;
+	transition: all .2s ease;
+}
+
+.button-toolbar{
+	text-align: center;
+}
+
+label {
+	margin-top: 1em;
+	margin-bottom: 4px;
+	font-weight: 700;
+	padding-right: 10px;
+}
+
+#label-data{
+	position: relative;
+	top: -50px;
+}
+
+input {
+	border-radius: 5px;
+	width: 100%;
+	background: #212D35;;
+	color: #FFF;
+	padding: 5px;
+}
+
+.data-label{
+	width: 25%;
+	display: inline-block;
+	text-align: left;
+	color: #4495d1;
+}
+
+.data-content{
+	width: 74%;
+	display: inline-block;
+}
+
+textarea {
+	height: 5em;
+	margin-bottom: 0;
+	border-radius: 5px;
+	width: 100%;
+	background: #212D35;;
+	color: #FFF;
+	padding: 5px;
+}
+
+#received {
+	width: 90%;
+	overflow: scroll;
+	border: gray solid 1px;
+	border-radius: 5px;
+	overflow: auto;
+	padding: 5px;
+	background: #212D35;;
+	height: calc(100vh - 297px);
+}
+
+#received pre{
+	font-weight: bold;
+	/* color: #27CC8D; */
+}
+
+.title {
+	font-weight: bold;
+	color: #4495d1
+}
+
+.row-div{
+	width:90%;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	vertical-align: middle;
+}
+
+@media(max-width: 650px){
+	.data-label{
+		width: 100%;
+	}
+
+	.data-content{
+		width: 100%;
+	}
+
+	#label-data{
+		position: static;
+	}
+}

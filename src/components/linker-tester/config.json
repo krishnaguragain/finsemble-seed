@@ -1,0 +1,66 @@
+{
+    "components": {
+        "Linker Tester": {
+            "window": {
+                "url": "$applicationRoot/components/linker-tester",
+                "frame": false,
+                "resizable": false,
+                "autoShow": true,
+                "top": "center",
+                "left": "center",
+                "width": 670,
+                "height": 600
+            },
+            "foreign": {
+                "services": {
+                    "dockingService": {
+                        "canGroup": true,
+                        "isArrangable": true
+                    }
+                },
+                "components": {
+                    "App Launcher": {
+                        "launchableByUser": true
+                    },
+                    "Window Manager": {
+                        "title": "Linker Tester",
+                        "showLinker": true,
+                        "FSBLHeader": true,
+                        "persistWindowState": true
+                    },
+                    "Toolbar": {
+                        "iconClass": "linkerTester"
+                    }
+                }
+            }
+        },
+        "AlertDialog":{
+            "window": {
+                "url": "$applicationRoot/components/linker-tester/notification.html",
+                "frame": false,
+                "resizable": false,
+                "autoShow": true,
+                "top": "center",
+                "left": "center",
+                "width": 300,
+                "height": 300
+            },
+            "foreign": {
+                "components": {
+                    "App Launcher": {
+                        "launchableByUser": false
+                    },
+                    "Window Manager": {
+                        "title": "Alert Dialog",
+                        "FSBLHeader": true,
+                        "persistWindowState": true
+                    },
+                    "Toolbar": {
+                        "iconClass": ""
+                    }
+                }
+            }
+        } 
+    }
+}
+
