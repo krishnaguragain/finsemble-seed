@@ -1,3 +1,4 @@
+let username = '';
 
 const FSBLReady = () => {
 	try {
@@ -5,6 +6,7 @@ const FSBLReady = () => {
 			if(err){
 	
 			}else{
+				username = credential.credentials.username
 				let pdfList = document.getElementById('pdfList')
 				if(credential.credentials.username=='ethan'){
 					let pdfNode = document.createElement("a");                
@@ -70,26 +72,15 @@ const spawnPdfJs = (data) => {
 const follow = (list) => {
 	document.getElementById('unfollow').style.display = "block";
 	document.getElementById('follow').style.display = "none";
-	FSBL.Clients.AuthenticationClient.getCurrentCredentials((err, credential)=>{
-		if(err){
+	FSBL.Clients.RouterClient.transmit('UserActivity', {user:username, action:{type:"follow", url: list}, timestamp: new Date()})
 
-		}else{
-			FSBL.Clients.RouterClient.transmit('UserActivity', {user:credential.credentials.username, action:{type:"follow", url: list}, timestamp: new Date()})
-		}
-	})
 }
 window.follow=follow
 
 const unfollow = (list) => {
 	document.getElementById('follow').style.display = "block";
 	document.getElementById('unfollow').style.display = "none";
-	FSBL.Clients.AuthenticationClient.getCurrentCredentials((err, credential)=>{
-		if(err){
-
-		}else{
-			FSBL.Clients.RouterClient.transmit('UserActivity', {user:credential.credentials.username, action:{type:"unfollow", url: list}, timestamp: new Date()})
-		}
-	})
+	FSBL.Clients.RouterClient.transmit('UserActivity', {user:username, action:{type:"unfollow", url: list}, timestamp: new Date()})
 }
 window.unfollow=unfollow
 

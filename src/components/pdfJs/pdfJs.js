@@ -1,6 +1,7 @@
 
 const STATE_TOPIC_URL = 'pdfUrl';
 let currrentUrl = null;
+let username = '';
 
 const observeDocumentTitle = function(){
 	//observe page title to set window title on PDF load
@@ -29,24 +30,11 @@ const loadURL = function(url) {
 		FSBL.Clients.Logger.log("Loading URL: " + url);
 		if(currrentUrl){
 			let preUrl = currrentUrl;
-			FSBL.Clients.AuthenticationClient.getCurrentCredentials((err, credential)=>{
-				if(err){
-	
-				}else{
-					FSBL.Clients.RouterClient.transmit('UserActivity', {user:credential.credentials.username, action:{type:"unloadURL", url: preUrl}, timestamp: new Date()})
-				}
-			})
+			FSBL.Clients.RouterClient.transmit('UserActivity', {user:username, action:{type:"unloadURL", url: preUrl}, timestamp: new Date()})
 		}
 
-
 		currrentUrl = url;
-		FSBL.Clients.AuthenticationClient.getCurrentCredentials((err, credential)=>{
-			if(err){
-
-			}else{
-				FSBL.Clients.RouterClient.transmit('UserActivity', {user:credential.credentials.username, action:{type:"loadURL", url: url}, timestamp: new Date()})
-			}
-		})
+		FSBL.Clients.RouterClient.transmit('UserActivity', {user:username, action:{type:"loadURL", url: url}, timestamp: new Date()})
 		
 		PDFViewerApplication.open(url);
 		FSBL.Clients.WindowClient.setComponentState({ field: STATE_TOPIC_URL, value: url });
@@ -120,6 +108,13 @@ const FSBLReady = () => {
 		observeDocumentTitle();
 		init();
 		setupContextSharing();
+		FSBL.Clients.AuthenticationClient.getCurrentCredentials((err, credential)=>{
+			if(err){
+
+			}else{
+				username = credential.credentials.username
+			}
+		})
 	} catch (e) {
 		FSBL.Clients.Logger.error(e);
 	}

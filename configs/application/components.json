@@ -316,7 +316,7 @@
                 "autoShow": true,
                 "top": "center",
                 "left": "center",
-                "width": 800,
+                "width": 400,
                 "height": 600
             },
             "component": {
