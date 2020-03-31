@@ -1,6 +1,32 @@
+
 const FSBLReady = () => {
 	try {
-		// Do things with FSBL in here.
+		FSBL.Clients.AuthenticationClient.getCurrentCredentials((err, credential)=>{
+			if(err){
+	
+			}else{
+				let pdfList = document.getElementById('pdfList')
+				if(credential.credentials.username=='ethan'){
+					let pdfNode = document.createElement("a");                
+					pdfNode.setAttribute('href','#')
+					pdfNode.innerHTML = 'Library_DataSheet_7_26_17.pdf'
+					pdfNode.onclick = () =>{
+						openPdf('https://cdn2.hubspot.net/hubfs/2246990/_ChartingLibrary/Library_DataSheet_7_26_17.pdf')
+					}
+					pdfList.appendChild(pdfNode)
+					pdfList.appendChild(document.createElement("br"))
+				}else if(credential.credentials.username=='jim'){
+					let pdfNode = document.createElement("a");                
+					pdfNode.setAttribute('href','#')
+					pdfNode.innerHTML = 'Finsemble_DataSheet_2019.05.15.pdf'
+					pdfNode.onclick = () =>{
+						openPdf('https://cdn2.hubspot.net/hubfs/2246990/_Finsemble/DataSheets/Finsemble_DataSheet_2019.05.15.pdf')
+					}
+					pdfList.appendChild(pdfNode)
+					pdfList.appendChild(document.createElement("br"))
+				}
+			}
+		})
 	} catch (e) {
 		FSBL.Clients.Logger.error(e);
 	}
@@ -41,6 +67,32 @@ const spawnPdfJs = (data) => {
 	});
 }
 
+const follow = (list) => {
+	document.getElementById('unfollow').style.display = "block";
+	document.getElementById('follow').style.display = "none";
+	FSBL.Clients.AuthenticationClient.getCurrentCredentials((err, credential)=>{
+		if(err){
+
+		}else{
+			FSBL.Clients.RouterClient.transmit('UserActivity', {user:credential.credentials.username, action:{type:"follow", url: list}, timestamp: new Date()})
+		}
+	})
+}
+window.follow=follow
+
+const unfollow = (list) => {
+	document.getElementById('follow').style.display = "block";
+	document.getElementById('unfollow').style.display = "none";
+	FSBL.Clients.AuthenticationClient.getCurrentCredentials((err, credential)=>{
+		if(err){
+
+		}else{
+			FSBL.Clients.RouterClient.transmit('UserActivity', {user:credential.credentials.username, action:{type:"unfollow", url: list}, timestamp: new Date()})
+		}
+	})
+}
+window.unfollow=unfollow
+
 
 if (window.FSBL && FSBL.addEventListener) {
 	FSBL.addEventListener("onReady", FSBLReady)
@@ -53,7 +105,7 @@ if (window.FSBL && FSBL.addEventListener) {
 		}
 		document.getElementById('pdfList').appendChild(pdfNode)
 		FSBL.UserNotification.alert("system", "ALWAYS", "MANIFEST-Error", 'New Research Found! CryptoIQ_Data_Sheet.pdf');
-	},1000)
+	},60000)
 } else {
 	window.addEventListener("FSBLReady", FSBLReady)
 }

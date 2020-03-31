@@ -27,7 +27,6 @@ const loadURL = function(url) {
 		FSBL.Clients.Logger.log("Skipping load, current URL already loaded: " + url);
 	} else {
 		FSBL.Clients.Logger.log("Loading URL: " + url);
-		console.log(currrentUrl)
 		if(currrentUrl){
 			let preUrl = currrentUrl;
 			FSBL.Clients.AuthenticationClient.getCurrentCredentials((err, credential)=>{
