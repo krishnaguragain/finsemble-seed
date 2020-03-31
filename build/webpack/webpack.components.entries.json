@@ -10,5 +10,13 @@
     "pdfTester": {
         "output": "components/pdfTester/pdfTester",
         "entry": "./src/components/pdfTester/pdfTester.js"
+    },
+    "PdfList": {
+        "output": "components/PdfList/PdfList",
+        "entry": "./src/components/PdfList/PdfList.js"
+    },
+    "ActivityList": {
+        "output": "components/ActivityList/ActivityList",
+        "entry": "./src/components/ActivityList/ActivityList.js"
     }
 }

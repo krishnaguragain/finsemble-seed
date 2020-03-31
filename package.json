@@ -89,6 +89,7 @@
         "url-loader": "0.6.2",
         "webpack": "2.7.0",
         "webpack-dev-middleware": "1.12.2",
-        "webpack-glob-entries": "1.0.1"
+        "webpack-glob-entries": "1.0.1",
+        "mongodb": "^3.3.2"
     }
 }

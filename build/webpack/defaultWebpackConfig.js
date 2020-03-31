@@ -106,6 +106,7 @@ module.exports = class WebpackDefaults {
 					}
 				]
 			},
+			node: { fs: 'empty', net: 'empty', tls: 'empty'},
 			plugins: plugins,
 			output: {
 				filename: "[name].js",

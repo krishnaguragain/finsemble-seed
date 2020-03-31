@@ -22,6 +22,8 @@
 	const fs = require("fs");
 	const path = require("path");
 	const compression = require("compression");
+	const bodyParser = require("body-parser");
+
 	// Local
 
 	const handleError = e => {
@@ -159,6 +161,49 @@
 				notified_sm = true;
 			}
 			next();
+		});
+
+
+		var MongoClient = require('mongodb').MongoClient;
+		var url = "mongodb://127.0.0.1:27017";
+		app.use(bodyParser.urlencoded({
+			extended: true
+		}));
+		app.all('/push_useractivity', function (req, res) {
+			MongoClient.connect(url, {
+				useNewUrlParser: true,
+				useUnifiedTopology: true
+			}, function (err, db) {
+				if (err) throw err;
+				var dbo = db.db("chartiq");
+				dbo.collection("fsbl").update({
+					key: req.body.user
+				}, req.body, {
+					upsert: true
+				}, function (err, res) {
+					if (err) throw err;
+					db.close();
+				});
+			});
+			res.sendStatus(200);
+		});
+
+		app.all('/pull_useractivity', function (req, res) {
+			MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true }, function(err, db) {
+				if (err) throw err;
+				const dbo = db.db("chartiq");
+
+				dbo.collection("fsbl").find({ key: req.query.key }).sort({$natural:-1}).toArray((err, result) => {
+					if (result.length === 1) {
+						console.log(result[0])
+						res.json(result[0])
+						db.close()
+					} else {
+						res.json(result)
+						db.close()
+					}      
+				})
+			})
 		});
 	}
 	/**

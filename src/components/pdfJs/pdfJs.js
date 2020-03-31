@@ -27,7 +27,28 @@ const loadURL = function(url) {
 		FSBL.Clients.Logger.log("Skipping load, current URL already loaded: " + url);
 	} else {
 		FSBL.Clients.Logger.log("Loading URL: " + url);
+		console.log(currrentUrl)
+		if(currrentUrl){
+			let preUrl = currrentUrl;
+			FSBL.Clients.AuthenticationClient.getCurrentCredentials((err, credential)=>{
+				if(err){
+	
+				}else{
+					FSBL.Clients.RouterClient.transmit('UserActivity', {user:credential.credentials.username, action:{type:"unloadURL", url: preUrl}, timestamp: new Date()})
+				}
+			})
+		}
+
+
 		currrentUrl = url;
+		FSBL.Clients.AuthenticationClient.getCurrentCredentials((err, credential)=>{
+			if(err){
+
+			}else{
+				FSBL.Clients.RouterClient.transmit('UserActivity', {user:credential.credentials.username, action:{type:"loadURL", url: url}, timestamp: new Date()})
+			}
+		})
+		
 		PDFViewerApplication.open(url);
 		FSBL.Clients.WindowClient.setComponentState({ field: STATE_TOPIC_URL, value: url });
 	}
@@ -107,6 +128,17 @@ const FSBLReady = () => {
 
 if (window.FSBL && FSBL.addEventListener) {
 	FSBL.addEventListener("onReady", FSBLReady)
+
+	window.onbeforeunload = function(e) {
+		FSBL.Clients.AuthenticationClient.getCurrentCredentials((err, credential)=>{
+			if(err){
+
+			}else{
+				FSBL.Clients.RouterClient.transmit('UserActivity', {user:credential.credentials.username, action:{type:"unloadURL", url: currrentUrl}, timestamp: new Date()})
+			}
+		})
+	};
+
 } else {
 	window.addEventListener("FSBLReady", FSBLReady)
 }
