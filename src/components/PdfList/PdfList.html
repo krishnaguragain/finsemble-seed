@@ -12,8 +12,11 @@
   </head>
   <body>
     <h1>PdfList</h1>
-    <a id='follow' onclick="follow('PdfList')" href="#" style='display: block'>Follow</a>
-    <a id='unfollow' onclick="unfollow('PdfList')" href="#" style='display: none'>Unfollow</a>
+    <div>
+      <button id='follow' class="button" onclick="follow('PdfList')">Follow</button>
+      <button id='unfollow' class="button" onclick="unfollow('PdfList')" style='display:none;'>Unfollow</button>
+    </div>
+
     <br />
     <div id="pdfList">
     </div>

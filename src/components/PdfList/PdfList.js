@@ -9,21 +9,27 @@ const FSBLReady = () => {
 				username = credential.credentials.username
 				let pdfList = document.getElementById('pdfList')
 				if(credential.credentials.username=='ethan'){
-					let pdfNode = document.createElement("a");                
+					let pdfNode = document.createElement("div");                
 					pdfNode.setAttribute('href','#')
-					pdfNode.innerHTML = 'Library_DataSheet_7_26_17.pdf'
-					pdfNode.onclick = () =>{
+					pdfNode.innerHTML = 'Library_DataSheet_7_26_17.pdf '
+					let pdfButton = document.createElement("button"); 
+					pdfButton.innerHTML='Open PDF'  
+					pdfButton.onclick = () =>{
 						openPdf('https://cdn2.hubspot.net/hubfs/2246990/_ChartingLibrary/Library_DataSheet_7_26_17.pdf')
 					}
+					pdfNode.appendChild(pdfButton)
 					pdfList.appendChild(pdfNode)
 					pdfList.appendChild(document.createElement("br"))
 				}else if(credential.credentials.username=='jim'){
-					let pdfNode = document.createElement("a");                
+					let pdfNode = document.createElement("div");                
 					pdfNode.setAttribute('href','#')
-					pdfNode.innerHTML = 'Finsemble_DataSheet_2019.05.15.pdf'
-					pdfNode.onclick = () =>{
+					pdfNode.innerHTML = 'Finsemble_DataSheet_2019.05.15.pdf '
+					let pdfButton = document.createElement("button"); 
+					pdfButton.innerHTML='Open PDF'  
+					pdfButton.onclick = () =>{
 						openPdf('https://cdn2.hubspot.net/hubfs/2246990/_Finsemble/DataSheets/Finsemble_DataSheet_2019.05.15.pdf')
 					}
+					pdfNode.appendChild(pdfButton)
 					pdfList.appendChild(pdfNode)
 					pdfList.appendChild(document.createElement("br"))
 				}
@@ -88,15 +94,19 @@ window.unfollow=unfollow
 if (window.FSBL && FSBL.addEventListener) {
 	FSBL.addEventListener("onReady", FSBLReady)
 	setTimeout(()=>{
-		let pdfNode = document.createElement("a");                
+		let pdfNode = document.createElement("div");                
 		pdfNode.setAttribute('href','#')
-		pdfNode.innerHTML = 'CryptoIQ_Data_Sheet.pdf'
-		pdfNode.onclick = () =>{
+		pdfNode.innerHTML = 'CryptoIQ_Data_Sheet.pdf '
+		let pdfButton = document.createElement("button"); 
+		pdfButton.innerHTML='Open PDF'  
+		pdfButton.onclick = () =>{
 			openPdf('https://cdn2.hubspot.net/hubfs/2246990/_CryptoIQ/CryptoIQ_Data_Sheet.pdf')
 		}
-		document.getElementById('pdfList').appendChild(pdfNode)
+		pdfNode.appendChild(pdfButton)
+		pdfList.appendChild(pdfNode)
+		pdfList.appendChild(document.createElement("br"))
 		FSBL.UserNotification.alert("system", "ALWAYS", "MANIFEST-Error", 'New Research Found! CryptoIQ_Data_Sheet.pdf');
-	},60000)
+	},30000)
 } else {
 	window.addEventListener("FSBLReady", FSBLReady)
 }
