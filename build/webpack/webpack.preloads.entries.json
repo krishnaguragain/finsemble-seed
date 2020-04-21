@@ -6,5 +6,13 @@
 	"zoom": {
 		"output": "preloads/zoom",
 		"entry": "./src-built-in/preloads/zoom.js"
+	},
+	"chartiq": {
+		"output": "preloads/chart/chartiq",
+		"entry": "./src/preloads/chart/chartiq.js"
+	},
+	"chartiq-integration": {
+		"output": "preloads/chart/chartiq-integration",
+		"entry": "./src/preloads/chart/chartiq-integration.js"
 	}
 }
