@@ -15,12 +15,15 @@ const FSBLReady = () => {
 			}
 			let linkerGroup = spawnerConfig.window.data.linkerGroup;
 
-			spawnTabbedGroup(spawnerData.toSpawn, params, spawnerData.linkerGroup);
+			spawnTabbedGroup(spawnerData.toSpawn, params, spawnerData.linkerGroup)
+			.then(function (spawnResponses) {
+				FSBL.Clients.WindowClient.close({ removeFromWorkspace: true, closeWindow: true });	
+			});
 		} else {
 			FSBL.Logger.error("Received no spawner data, spawnerData: ", spawnerData);
+			FSBL.Clients.WindowClient.close({ removeFromWorkspace: true, closeWindow: true });
 		}
-		FSBL.Clients.WindowClient.close({ removeFromWorkspace: true, closeWindow: true });
-
+		
 	} catch (e) {
 		FSBL.Clients.Logger.error(e);
 	}
