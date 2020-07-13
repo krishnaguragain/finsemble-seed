@@ -109,6 +109,12 @@ class SymphonyService extends Finsemble.baseService {
 					},
 					createMessage: {
 						path: this.symphonyAppRoot + '/createMessage'
+					},
+					searchUsers:{
+						path: this.symphonyAppRoot + '/searchUsers'
+					},
+					createIM:{
+						path: this.symphonyAppRoot + '/createIM'
 					}
 				}
 
@@ -169,27 +175,6 @@ class SymphonyService extends Finsemble.baseService {
 					}
 				}
 				if (target != '') {
-					Finsemble.Clients.LauncherClient.showWindow({
-						componentType: target
-					}, {
-						spawnIfNotFound: true,
-						addToWorkspace: true,
-						position: "available", 
-						top: "center", 
-						left: "center",
-						data: {
-							symbol: symbol
-						}
-					}, (err, windowIdentifer) => {
-						if (!err) {
-							console.log(windowIdentifer)
-						} else {
-							console.log(err)
-						}
-					})
-
-
-
 					self.findAnInstance(target)
 						.then((windowsIdentifiers) => {
 							if (windowsIdentifiers.length > 0) {
@@ -197,7 +182,24 @@ class SymphonyService extends Finsemble.baseService {
 								Finsemble.Clients.RouterClient.transmit('symphonyTransmit', {symbol:symbol})
 							} else {
 								// No target found hence spawn / show 1
-								
+								Finsemble.Clients.LauncherClient.showWindow({
+									componentType: target
+								}, {
+									spawnIfNotFound: true,
+									addToWorkspace: true,
+									position: "available", 
+									top: "center", 
+									left: "center",
+									data: {
+										symbol: symbol
+									}
+								}, (err, windowIdentifer) => {
+									if (!err) {
+										console.log(windowIdentifer)
+									} else {
+										console.log(err)
+									}
+								})
 							}
 						})
 				}
@@ -248,6 +250,24 @@ class SymphonyService extends Finsemble.baseService {
 							.then((result) => {
 								queryMessage.sendQueryResponse(null, {
 									result: result
+								});
+							})
+						break;
+					case 'searchUsers':
+						let query = queryData.query
+						self.searchUsers(self.symphonyUserSessionToken, query)
+							.then((users) => {
+								queryMessage.sendQueryResponse(null, {
+									users: users
+								});
+							})
+						break;
+					case 'createIM':
+						let userIDs = queryData.userIDs
+						self.createIM(self.symphonyUserSessionToken, userIDs)
+							.then((id) => {
+								queryMessage.sendQueryResponse(null, {
+									id: id
 								});
 							})
 						break;
@@ -443,6 +463,84 @@ class SymphonyService extends Finsemble.baseService {
 				})
 				.then(data => {
 					resolve(data.result);
+				})
+				.catch(err => {
+					reject(err)
+				});
+		})
+	}
+
+	searchUsers(userSessionToken, query) {
+		let apiName = 'searchUsers'
+		let self = this
+		return new Promise(function (resolve, reject) {
+			fetch(self.symphonyApiSetting[apiName].path, {
+					method: "POST",
+					body: JSON.stringify({
+						userSessionToken: userSessionToken,
+						query: query
+					}),
+					headers: {
+						"Content-Type": "application/json"
+					}
+				})
+				.then(res => {
+					if (res.status == 200) {
+						return res.json()
+					} else if (res.status == 401) {
+						Finsemble.Clients.Logger.error("Failed to list user stream - userSession invalid", res);
+						self.getSymphonyUserSessionToken().then((userSessionToken) => {
+							self.symphonyUserSessionToken = userSessionToken
+							self.searchUsers(userSessionToken, query)
+								.then((result) => {
+									resolve(result);
+								})
+						})
+					} else {
+						reject(res.status)
+					}
+				})
+				.then(data => {
+					resolve(data.users);
+				})
+				.catch(err => {
+					reject(err)
+				});
+		})
+	}
+
+	createIM(userSessionToken, userIDs) {
+		let apiName = 'createIM'
+		let self = this
+		return new Promise(function (resolve, reject) {
+			fetch(self.symphonyApiSetting[apiName].path, {
+					method: "POST",
+					body: JSON.stringify({
+						userSessionToken: userSessionToken,
+						userIDs: userIDs
+					}),
+					headers: {
+						"Content-Type": "application/json"
+					}
+				})
+				.then(res => {
+					if (res.status == 200) {
+						return res.json()
+					} else if (res.status == 401) {
+						Finsemble.Clients.Logger.error("Failed to list user stream - userSession invalid", res);
+						self.getSymphonyUserSessionToken().then((userSessionToken) => {
+							self.symphonyUserSessionToken = userSessionToken
+							self.createIM(userSessionToken, userIDs)
+								.then((result) => {
+									resolve(result);
+								})
+						})
+					} else {
+						reject(res.status)
+					}
+				})
+				.then(data => {
+					resolve(data.id);
 				})
 				.catch(err => {
 					reject(err)

@@ -8,7 +8,9 @@ const symphonyServiceTopic = 'symphonyService'
 const symphonyQueryFunctionConfig = {
 	getUserStreamList: 'getSymphonyUserStreamList',
 	usersLookup: 'usersLookup',
-	createMessage: 'createMessage'
+	createMessage: 'createMessage',
+	searchUsers: 'searchUsers',
+	createIM: 'createIM'
 }
 
 const FSBLReady = () => {
@@ -26,23 +28,70 @@ const FSBLReady = () => {
 		routerAddQueryResponder()
 
 
-		//
+		// Retrieve existing symphony streams
 		retrieveSymphonyStream()
 
-		// 
-		retrieveSymphonyContactList()
 
 		// Register onclick function to oboMsgBtn
 		document.getElementById('oboMsgBtn').onclick = sendOboMsg
 
+		// Register onclick function to oboMsgBtn
+		document.getElementById('searchUsersBtn').onclick = searchUsers
+
+		// Register onclick function to oboMsgBtn
+		document.getElementById('createIMBtn').onclick = createIM
 
 	} catch (e) {
 		FSBL.Clients.Logger.error(e);
 	}
 }
 
-const retrieveSymphonyContactList = () => {
+const createIM = () => {
+	let selectedUsers = Array(...document.getElementById('searchUsersResult').options).reduce((acc, option) => {
+		if (option.selected === true) {
+			acc.push(option.value);
+		}
+		return acc;
+	}, []);
 
+	if (selectedUsers.length > 0) {
+		FSBL.Clients.RouterClient.query(symphonyServiceTopic, {
+			function: symphonyQueryFunctionConfig.createIM,
+			userIDs: selectedUsers
+		}, function (error, queryResponseMessage) {
+			if (!error) {
+				setDisplayMsg('New IM Created.', {})
+				let id = queryResponseMessage.data.id
+				retrieveSymphonyStream()
+					.then(() => {
+						document.getElementById('chatsSelect').value = id
+					})
+			}
+		});
+	} else {
+		setDisplayMsg('Please select at list 1 member.', {})
+	}
+}
+
+const searchUsers = () => {
+	let query = document.getElementById('searchUsersTxt').value
+	if (query != '') {
+		FSBL.Clients.RouterClient.query(symphonyServiceTopic, {
+			function: symphonyQueryFunctionConfig.searchUsers,
+			query: query
+		}, function (error, queryResponseMessage) {
+			if (!error) {
+				let users = queryResponseMessage.data.users
+				users.forEach(user => {
+					let userDisplayName = user.displayName + ', ' + user.company
+					let usedId = user.id
+					addOption('searchUsersResult', userDisplayName, usedId)
+				})
+			}
+		});
+	} else {
+		setDisplayMsg('Please input a query in the "Members" textbox.', {})
+	}
 }
 
 const sendOboMsg = () => {
@@ -65,51 +114,57 @@ const sendOboMsg = () => {
 }
 
 const retrieveSymphonyStream = () => {
-	FSBL.Clients.RouterClient.query(symphonyServiceTopic, {
-		function: symphonyQueryFunctionConfig.getUserStreamList,
-		streamTypes: [{
-				"type": "IM"
-			},
-			{
-				"type": "MIM"
-			},
-			{
-				"type": "ROOM"
-			}
-		]
-	}, function (error, queryResponseMessage) {
-		if (!error) {
-			let userStreamList = queryResponseMessage.data.userStreamList;
-			userStreamList.forEach(userStream => {
-				if (userStream.roomAttributes) {
-					// Handle chart room
-					chatsSelectAddOption(userStream.roomAttributes.name, userStream.id)
-				} else {
-					// Handle IM / MIM
-					// streamMembers only contains id
-					let streamMembers = userStream.streamAttributes.members
-					// Retrieve member info by id
-					FSBL.Clients.RouterClient.query(symphonyServiceTopic, {
-						function: symphonyQueryFunctionConfig.usersLookup,
-						userId: streamMembers
-					}, function (error, queryResponseMessage) {
-						if (!error) {
-							let memberInfo = queryResponseMessage.data.memberInfo.users
-							let memberDisplayName = []
-							memberInfo.forEach(member => {
-								memberDisplayName.push(member.displayName)
-							})
-							chatsSelectAddOption(memberDisplayName.toString(), userStream.id)
-						}
-					});
+	return new Promise(function (resolve, reject) {
+		document.getElementById("chatsSelect").options.length = 0;
+		FSBL.Clients.RouterClient.query(symphonyServiceTopic, {
+			function: symphonyQueryFunctionConfig.getUserStreamList,
+			streamTypes: [{
+					"type": "IM"
+				},
+				{
+					"type": "MIM"
+				},
+				{
+					"type": "ROOM"
 				}
-			})
-		}
-	});
+			]
+		}, function (error, queryResponseMessage) {
+			if (!error) {
+				let userStreamList = queryResponseMessage.data.userStreamList;
+				userStreamList.forEach((userStream, key, arr)=> {
+					if (userStream.roomAttributes) {
+						// Handle chart room
+						addOption('chatsSelect', userStream.roomAttributes.name, userStream.id)
+					} else {
+						// Handle IM / MIM
+						// streamMembers only contains id
+						let streamMembers = userStream.streamAttributes.members
+						// Retrieve member info by id
+						FSBL.Clients.RouterClient.query(symphonyServiceTopic, {
+							function: symphonyQueryFunctionConfig.usersLookup,
+							userId: streamMembers
+						}, function (error, queryResponseMessage) {
+							if (!error) {
+								let memberInfo = queryResponseMessage.data.memberInfo.users
+								let memberDisplayName = []
+								memberInfo.forEach(member => {
+									memberDisplayName.push(member.displayName)
+								})
+								addOption('chatsSelect', memberDisplayName.toString(), userStream.id)
+								if (key === arr.length - 1){ 
+									resolve();
+								}
+							}
+						});
+					}
+				})
+			}
+		});
+	})
 }
 
-const chatsSelectAddOption = ((name, value) => {
-	let chatsSelect = document.getElementById('chatsSelect')
+const addOption = ((elementId, name, value) => {
+	let chatsSelect = document.getElementById(elementId)
 	let tmpOption = document.createElement("option");
 	tmpOption.text = name;
 	tmpOption.value = value;
@@ -156,8 +211,8 @@ const routerSubscribe = () => {
 
 const getSpawnData = () => {
 	var spawnData = FSBL.Clients.WindowClient.getSpawnData();
-	if (spawnData) {
-		setDisplayMsg('Received spawn data from Symphony.', spawnData)
+	if (spawnData.data) {
+		setDisplayMsg('Received spawn data.', spawnData)
 	}
 }
 

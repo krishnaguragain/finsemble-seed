@@ -12,7 +12,7 @@
   </head>
   <body>
     <div id="container">
-      <div id='headerDiv'>
+      <div id="headerDiv">
         <h1>SymphonyTester</h1>
         <p>
           <b>Warning! Read before using the OBO function!</b>
@@ -23,42 +23,27 @@
           it carefully!
         </p>
       </div>
-      <div id='oboDiv'>
-        <div id="chatsDiv">
-          <h4>CHATS</h4>
-          <select id="chatsSelect" name="chatsSelect"> </select>
-          <h4>Send OBO Message</h4>
-          <textarea id="oboMsg"></textarea>
-          <button type="button" id="oboMsgBtn">Send</button>
+      <div id="connectionDiv">
+        <p>Create Direct Chat</p>
+        <div id='searchUsersDiv'>
+          <input id='searchUsersTxt'></input>
+          <button id='searchUsersBtn'>Search</button>
         </div>
+        <p>Members</p>
+        <select name="users" id="searchUsersResult" multiple>
+        </select>
+        <button id='createIMBtn'>Create Chat</button>
       </div>
-      <div id='resultDiv'>
-        <textarea id="resultMsg" readonly></textarea>
-      </div>
-    </div>
-
-    <!-- <h1>SymphonyTester</h1>
-    <div id="msgDiv">
-      <p>
-        <b>Warning! Read before using the OBO function!</b>
-      </p>
-      <p>
-        This <b>Send OBO Message</b> will send OBO message using the Symphony
-        username provided in the code to your actual Symphony chat. Please use it carefully!
-      </p>
-    </div>
-    <div id="container">
-      
       <div id="chatsDiv">
-        <h4>CHATS</h4>
+        <p>CHATS</p>
         <select id="chatsSelect" name="chatsSelect"> </select>
-        <h4>Send OBO Message</h4>
+        <p>Send OBO Message</p>
         <textarea id="oboMsg"></textarea>
         <button type="button" id="oboMsgBtn">Send</button>
       </div>
+      <div id="resultDiv">
+        <textarea id="resultMsg" readonly></textarea>
+      </div>
     </div>
-    <div>
-      
-    </div> -->
   </body>
 </html>
