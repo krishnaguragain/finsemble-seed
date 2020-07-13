@@ -110,10 +110,10 @@ class SymphonyService extends Finsemble.baseService {
 					createMessage: {
 						path: this.symphonyAppRoot + '/createMessage'
 					},
-					searchUsers:{
+					searchUsers: {
 						path: this.symphonyAppRoot + '/searchUsers'
 					},
-					createIM:{
+					createIM: {
 						path: this.symphonyAppRoot + '/createIM'
 					}
 				}
@@ -172,7 +172,7 @@ class SymphonyService extends Finsemble.baseService {
 							break
 						case 'testData':
 							symbol = pair[1]
-								break
+							break
 						default:
 							break;
 					}
@@ -182,7 +182,9 @@ class SymphonyService extends Finsemble.baseService {
 						.then((windowsIdentifiers) => {
 							if (windowsIdentifiers.length > 0) {
 								// Target conmponent exist, transmit a message
-								Finsemble.Clients.RouterClient.transmit('symphonyTransmit', {symbol:symbol})
+								Finsemble.Clients.RouterClient.transmit('symphonyTransmit', {
+									symbol: symbol
+								})
 							} else {
 								// No target found hence spawn / show 1
 								Finsemble.Clients.LauncherClient.showWindow({
@@ -190,8 +192,8 @@ class SymphonyService extends Finsemble.baseService {
 								}, {
 									spawnIfNotFound: true,
 									addToWorkspace: true,
-									position: "available", 
-									top: "center", 
+									position: "available",
+									top: "center",
 									left: "center",
 									data: {
 										symbol: symbol
@@ -282,11 +284,11 @@ class SymphonyService extends Finsemble.baseService {
 		});
 	}
 
-	// This API should be protected by your server (i.e. userAuth session
+	// This API must be protected by your server (i.e. userAuth session)
 	getSymphonyUserSessionToken() {
 		let apiName = 'getSymphonyUserSessionToken'
 		let self = this
-		return new Promise(function (resolve, reject) {
+		return new Promise((resolve, reject) => {
 			fetch(self.symphonyApiSetting[apiName].path, {
 					method: "POST",
 					body: JSON.stringify({
@@ -318,7 +320,7 @@ class SymphonyService extends Finsemble.baseService {
 	listUserStreams(userSessionToken, streamTypes) {
 		let apiName = 'listUserStreams'
 		let self = this
-		return new Promise(function (resolve, reject) {
+		return new Promise((resolve, reject) => {
 			fetch(self.symphonyApiSetting[apiName].path, {
 					method: "POST",
 					body: JSON.stringify({
@@ -358,7 +360,7 @@ class SymphonyService extends Finsemble.baseService {
 		let apiName = 'usersLookup'
 		let self = this
 		userId.splice(userId.indexOf(this.symphonyUserInfo.id), 1)
-		return new Promise(function (resolve, reject) {
+		return new Promise((resolve, reject) => {
 			fetch(self.symphonyApiSetting[apiName].path, {
 					method: "POST",
 					body: JSON.stringify({
@@ -397,7 +399,7 @@ class SymphonyService extends Finsemble.baseService {
 	sessionUser(userSessionToken) {
 		let apiName = 'sessionUser'
 		let self = this
-		return new Promise(function (resolve, reject) {
+		return new Promise((resolve, reject) => {
 			fetch(self.symphonyApiSetting[apiName].path, {
 					method: "POST",
 					body: JSON.stringify({
@@ -436,7 +438,7 @@ class SymphonyService extends Finsemble.baseService {
 		let apiName = 'createMessage'
 		msg = '<messageML>' + msg + '</messageML>'
 		let self = this
-		return new Promise(function (resolve, reject) {
+		return new Promise((resolve, reject) => {
 			fetch(self.symphonyApiSetting[apiName].path, {
 					method: "POST",
 					body: JSON.stringify({
@@ -476,7 +478,7 @@ class SymphonyService extends Finsemble.baseService {
 	searchUsers(userSessionToken, query) {
 		let apiName = 'searchUsers'
 		let self = this
-		return new Promise(function (resolve, reject) {
+		return new Promise((resolve, reject) => {
 			fetch(self.symphonyApiSetting[apiName].path, {
 					method: "POST",
 					body: JSON.stringify({
@@ -515,7 +517,7 @@ class SymphonyService extends Finsemble.baseService {
 	createIM(userSessionToken, userIDs) {
 		let apiName = 'createIM'
 		let self = this
-		return new Promise(function (resolve, reject) {
+		return new Promise((resolve, reject) => {
 			fetch(self.symphonyApiSetting[apiName].path, {
 					method: "POST",
 					body: JSON.stringify({

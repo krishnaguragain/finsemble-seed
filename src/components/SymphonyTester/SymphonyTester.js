@@ -57,7 +57,7 @@ const createIM = () => {
 		FSBL.Clients.RouterClient.query(symphonyServiceTopic, {
 			function: symphonyQueryFunctionConfig.createIM,
 			userIDs: selectedUsers
-		}, function (error, queryResponseMessage) {
+		}, (error, queryResponseMessage) => {
 			if (!error) {
 				setDisplayMsg('New IM Created.', {})
 				let id = queryResponseMessage.data.id
@@ -78,7 +78,7 @@ const searchUsers = () => {
 		FSBL.Clients.RouterClient.query(symphonyServiceTopic, {
 			function: symphonyQueryFunctionConfig.searchUsers,
 			query: query
-		}, function (error, queryResponseMessage) {
+		}, (error, queryResponseMessage) => {
 			if (!error) {
 				let users = queryResponseMessage.data.users
 				users.forEach(user => {
@@ -113,7 +113,7 @@ const sendOboMsg = () => {
 }
 
 const retrieveSymphonyStream = () => {
-	return new Promise(function (resolve, reject) {
+	return new Promise((resolve, reject) => {
 		document.getElementById("chatsSelect").options.length = 0;
 		FSBL.Clients.RouterClient.query(symphonyServiceTopic, {
 			function: symphonyQueryFunctionConfig.getUserStreamList,
@@ -142,7 +142,7 @@ const retrieveSymphonyStream = () => {
 						FSBL.Clients.RouterClient.query(symphonyServiceTopic, {
 							function: symphonyQueryFunctionConfig.usersLookup,
 							userId: streamMembers
-						}, function (error, queryResponseMessage) {
+						}, (error, queryResponseMessage) => {
 							if (!error) {
 								let memberInfo = queryResponseMessage.data.memberInfo.users
 								let memberDisplayName = []
@@ -182,7 +182,7 @@ const routerListen = () => {
 }
 
 const routerAddQueryResponder = () => {
-	FSBL.Clients.RouterClient.addResponder(routerQueryRespondChannel, function (err, queryMessage) {
+	FSBL.Clients.RouterClient.addResponder(routerQueryRespondChannel, (err, queryMessage) => {
 		if (err) {
 			setDisplayMsg('addResponder failed.', err);
 		} else {
@@ -210,7 +210,7 @@ const routerSubscribe = () => {
 
 const getSpawnData = () => {
 	var spawnData = FSBL.Clients.WindowClient.getSpawnData();
-	if (spawnData.data) {
+	if (Object.keys(spawnData).length != 0) {
 		setDisplayMsg('Received spawn data.', spawnData)
 	}
 }
