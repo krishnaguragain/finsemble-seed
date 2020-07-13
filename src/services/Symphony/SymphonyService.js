@@ -170,6 +170,9 @@ class SymphonyService extends Finsemble.baseService {
 						case 'symbol':
 							symbol = pair[1]
 							break
+						case 'testData':
+							symbol = pair[1]
+								break
 						default:
 							break;
 					}

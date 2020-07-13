@@ -40,7 +40,6 @@ const FSBLReady = () => {
 
 		// Register onclick function to oboMsgBtn
 		document.getElementById('createIMBtn').onclick = createIM
-
 	} catch (e) {
 		FSBL.Clients.Logger.error(e);
 	}
