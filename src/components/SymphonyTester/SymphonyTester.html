@@ -23,24 +23,76 @@
           it carefully!
         </p>
       </div>
-      <div id="connectionDiv">
-        <p>Create Direct Chat</p>
-        <div id='searchUsersDiv'>
-          <input id='searchUsersTxt'></input>
-          <button id='searchUsersBtn'>Search</button>
+      <div id="funcContainer">
+        <div id="sendMsgDiv">
+          <div class="halfcol">
+            <label for="chatsSelect">Chats</label>
+            <select id="chatsSelect" name="chatsSelect"></select>
+            <br /><br /><br />
+            <button id="newDirectChartBtn">+ New Direct Chat</button>
+            <br /><br />
+            <button id="newChatRoomBtn">+ New Chat Room</button>
+          </div>
+          <div class="halfcol">
+            <label for="tickerText">Share Chart</label>
+            <input type="text" id="tickerText" placeholder="Input a ticker" />
+            <button type="button" id="shareChartBtn">Share</button>
+            <br /><br /><br />
+            <label for="oboMsg">OBO Message</label>
+            <textarea id="oboMsg" placeholder="Input your message"></textarea>
+            <button type="button" id="oboMsgBtn">Send</button>
+          </div>
         </div>
-        <p>Members</p>
-        <select name="users" id="searchUsersResult" multiple>
-        </select>
-        <button id='createIMBtn'>Create Chat</button>
+        <div id="createGroupDiv">
+          <h4 id='createHeader'>New Direct Chat</h4>
+          <div class="halfcol">
+            <div id="chatroomNameDiv">
+              <label for="chatroomText">Chatroom Name</label>
+              <input id="chatroomText" placeholder="Input Chatroom name" />
+              <br /><br />
+            </div>
+
+            <label for="tab">Select Member</label>
+            <div class="tab">
+              <button class="tablinks" id="internalTab">Internal</button>
+              <button class="tablinks" id="externalTab">External</button>
+              <button class="tablinks" id="searchTab">Search</button>
+            </div>
+
+            <div id="internalTabDiv" class="tabcontent">
+              <select
+                id="internalConnections"
+                name="internalConnections"
+                multiple
+              >
+              </select>
+            </div>
+
+            <div id="externalTabDiv" class="tabcontent">
+              <select
+                id="externalConnections"
+                name="externalConnections"
+                multiple
+              >
+              </select>
+            </div>
+
+            <div id="searchTabDiv" class="tabcontent">
+              <input id="searchUsersTxt" />
+              <button id="searchUsersBtn">Search</button>
+              <select name="searchUsersResult" id="searchUsersResult" multiple></select>
+            </div>
+          </div>
+          <div class="halfcol">
+            <label for="memberList">Members</label>
+            <select name="memberList" id="memberList" multiple> </select>
+            <button id="createChatBtn">Create</button>
+            <button id="createChatroomBtn">Create</button>
+            <button id="backBtn">Back</button>
+          </div>
+        </div>
       </div>
-      <div id="chatsDiv">
-        <p>CHATS</p>
-        <select id="chatsSelect" name="chatsSelect"> </select>
-        <p>Send OBO Message</p>
-        <textarea id="oboMsg"></textarea>
-        <button type="button" id="oboMsgBtn">Send</button>
-      </div>
+
       <div id="resultDiv">
         <textarea id="resultMsg" readonly></textarea>
       </div>

@@ -68,8 +68,10 @@
         }
     ],
     "finsemble": {
-        "symphonyAppTokenRoot": "http://localhost:4001",
-        "symphonyAPIRoot": "https://chartiq.symphony.com/",
+        "symphony":{
+            "appTokenRoot": "http://localhost:4001",
+            "//defaultUsername": "Ethan"
+        },
         "applicationRoot": "http://localhost:3375",
         "moduleRoot": "$applicationRoot/finsemble",
         "servicesRoot": "$applicationRoot/finsemble/services",
