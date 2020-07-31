@@ -69,8 +69,10 @@ class SymphonyService extends Finsemble.baseService {
 		this.symphonyUserInfo = {}
 		this.symphonyApiSetting = {}
 		this.symphonyServiceTopic = 'symphonyService'
+		// The config path to retrieve config form manifest
 		this.finsembleSymphonyAppTokenRootConfigPath = 'finsemble.symphony.appTokenRoot'
 		this.finsembleSymphonyDefaultUsernameConfigPath = 'finsemble.symphony.defaultUsername'
+
 		this.symphonyAppRoot = ''
 		this.symphonyUserSessionToken = ''
 		this.readyHandler = this.readyHandler.bind(this);
@@ -83,18 +85,20 @@ class SymphonyService extends Finsemble.baseService {
 	 */
 	readyHandler(callback) {
 		this.createRouterEndpoints();
-		//
-		this.retrieveRootConfgi()
+		this.retrieveRootConfig()
 
 		Finsemble.Clients.Logger.log("Symphony Service ready");
 		callback();
 	}
 
-	retrieveRootConfgi() {
+	retrieveRootConfig() {
 		Finsemble.Clients.ConfigClient.getValues([this.finsembleSymphonyAppTokenRootConfigPath, this.finsembleSymphonyDefaultUsernameConfigPath], (err, configRes) => {
 			if (!err) {
 				this.symphonyAppRoot = configRes[this.finsembleSymphonyAppTokenRootConfigPath]
+				// Your Symphony API URL
 				this.symphonyApiSetting = {
+					// This API endpoint must be protected by your server using authentication (session/key)
+					// Only the particular user can get his own Symphony user session
 					getSymphonyUserSessionToken: {
 						path: this.symphonyAppRoot + '/getSymphonyUserSessionToken'
 					},
@@ -130,10 +134,10 @@ class SymphonyService extends Finsemble.baseService {
 					}
 				}
 
-
 				// The symphony username should be retireved from your auth system
 				// For demo or testing purpose the symphony username is hardcoded below / in manifest
 				// For testing, input your testing Symphony username below or in manifest $symphonyDefaultUsername
+				// Your can send message on behalf of someone in youe pod. Please use it carefully.
 				Finsemble.Clients.AuthenticationClient.getCurrentCredentials((err, authRes) => {
 					if (!err) {
 						if (authRes) {
@@ -148,8 +152,8 @@ class SymphonyService extends Finsemble.baseService {
 							Finsemble.Clients.Logger.log('Getting Symphony Username from Manifest')
 
 						} else {
-							// Hardcoded in service, only for development / testing
-							this.symphonyUsername = 'Ethan'
+							// Hardcoded here in service, only for development / testing
+							this.symphonyUsername = ''
 							Finsemble.Clients.Logger.log('Getting Symphony Username from service code')
 						}
 
@@ -186,7 +190,8 @@ class SymphonyService extends Finsemble.baseService {
 			"State": "start"
 		})
 
-		// Protocol handler example
+		// Protocol handler example which sending protocol event from ExtensionApp
+		// e.g. fsbl://custom/SymphonyExtension/rfq?target=SymphonyTester&testData=AAPL
 		fin.desktop.System.addEventListener('protocol-handler-triggered', (data) => {
 			if (data.url) {
 				let protocolURL = new URL(data.url)
@@ -209,6 +214,7 @@ class SymphonyService extends Finsemble.baseService {
 					}
 				}
 				if (target != '') {
+					// Search for existing target component
 					self.findAnInstance(target)
 						.then((windowsIdentifiers) => {
 							if (windowsIdentifiers.length > 0) {
@@ -217,7 +223,7 @@ class SymphonyService extends Finsemble.baseService {
 									symbol: symbol
 								})
 							} else {
-								// No target found hence spawn / show 1
+								// No target found hence spawn / show 1 with spawn data
 								Finsemble.Clients.LauncherClient.showWindow({
 									componentType: target
 								}, {
@@ -242,7 +248,7 @@ class SymphonyService extends Finsemble.baseService {
 			}
 		})
 
-		// 
+		// Create query responder for componet to use Symphony func
 		Finsemble.Clients.RouterClient.addResponder(this.symphonyServiceTopic, (err, queryMessage) => {
 			if (err) {
 				Finsemble.Clients.Logger.error("Failed to receive Symphony Service query", err);
@@ -347,7 +353,7 @@ class SymphonyService extends Finsemble.baseService {
 		});
 	}
 
-	// This API must be protected by your server (i.e. userAuth session)
+	// IMPORTANT: This API must be protected by your server (i.e. userAuth session)
 	getSymphonyUserSessionToken() {
 		let apiName = 'getSymphonyUserSessionToken'
 		let self = this
@@ -787,7 +793,6 @@ class SymphonyService extends Finsemble.baseService {
 		})
 	}
 
-
 	async findAnInstance(componentType) {
 		let {
 			err,
@@ -809,8 +814,6 @@ class SymphonyService extends Finsemble.baseService {
 			return Promise.resolve(windowIdentifiers);
 		}
 	}
-
-
 }
 
 const serviceInstance = new SymphonyService();

@@ -70,7 +70,7 @@
     "finsemble": {
         "symphony":{
             "appTokenRoot": "http://localhost:4001",
-            "//defaultUsername": "Ethan"
+            "defaultUsername": "finjsdemo"
         },
         "applicationRoot": "http://localhost:3375",
         "moduleRoot": "$applicationRoot/finsemble",
