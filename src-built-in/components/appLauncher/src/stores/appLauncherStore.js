@@ -123,14 +123,9 @@ var Actions = {
 	// Custom Components are always shown @TODO - make this a setting
 	filterComponents(components) {
 		var self = this;
-		var settings = FSBL.Clients.WindowClient.options.customData.spawnData;
+		var settings = FSBL.Clients.WindowClient.options.customData.spawnData || {};
 		var componentList = {};
 		var keys = Object.keys(components);
-		// these settings should never be null, but they are on startup, which causes a type error.  Needs further investigation.
-		if (!settings) {
-			settings = {};
-			FSBL.Clients.Logger.system.warn("appLauncherStore.js: null settings");
-		}
 		if (settings.mode) {
 			if (!Array.isArray(settings.mode)) { settings.mode = [settings.mode]; }
 			keys.forEach((componentType) => {
