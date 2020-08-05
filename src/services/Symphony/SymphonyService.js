@@ -192,7 +192,7 @@ class SymphonyService extends Finsemble.baseService {
 
 		// Protocol handler example which sending protocol event from ExtensionApp
 		// e.g. fsbl://custom/SymphonyExtension/rfq?target=SymphonyTester&testData=AAPL
-		fin.desktop.System.addEventListener('protocol-handler-triggered', (data) => {
+		Finsemble.System.addEventListener("protocol-handler-triggered", (data) => {
 			if (data.url) {
 				let protocolURL = new URL(data.url)
 				let params = protocolURL.searchParams;
