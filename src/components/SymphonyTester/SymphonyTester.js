@@ -42,6 +42,10 @@ const FSBLReady = () => {
 		// Register onclick function to oboMsgBtn
 		document.getElementById('oboMsgBtn').onclick = sendOboMsg
 
+		document.getElementById('symphonyShareBtn').onclick = symphonyShare
+		
+
+
 		// Register onclick function to oboMsgBtn
 		document.getElementById('searchUsersBtn').onclick = searchUsers
 
@@ -69,6 +73,26 @@ const FSBLReady = () => {
 		document.getElementById('shareChartBtn').onclick = shareChart
 	} catch (e) {
 		FSBL.Clients.Logger.error(e);
+	}
+}
+
+const symphonyShare = (e) => {
+	let msg = document.getElementById('oboMsg').value
+	console.log(e)
+	if (msg != '') {
+		FSBL.Clients.LauncherClient.toggleWindowOnClick(document.getElementById('symphonyShareBtn'), {
+			componentType: 'SymphonySharer'
+		}, {
+			data: {
+				shareMsg: msg
+			},
+			addToWorkspace: false,
+			spawnIfNotFound: true,
+			top: e.screenY,
+			left: e.screenX
+		})
+	} else {
+		setDisplayMsg('Please input a message in the "Send OBO Message" textarea.', {})
 	}
 }
 

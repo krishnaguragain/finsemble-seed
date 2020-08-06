@@ -239,6 +239,54 @@
                     }
                 }
             }
+        },
+        "SymphonySharer": {
+            "window": {
+                "url": "$applicationRoot/components/SymphonySharer/SymphonySharer.html",
+                "options": {
+                    "resizable": false,
+                    "autoShow": true,
+                    "alwaysOnTop": false
+                },
+                "top": "center",
+                "left": "center",
+                "width": 250,
+                "height": 300
+            },
+            "component": {
+                "preload": false,
+                "spawnOnStartup": false,
+                "singleton": true,
+                "showDevConsoleOnVisible": false
+            },
+            "foreign": {
+                "services": {
+                    "windowService": {
+                        "manageWindowMovement": true,
+                        "allowAutoArrange": false,
+                        "allowSnapping": true,
+                        "allowTabbing": false,
+                        "allowTiling": false,
+                        "allowGrouping": false,
+                        "allowMinimize": false
+                    },
+                    "workspace": {}
+                },
+                "components": {
+                    "App Launcher": {
+                        "launchableByUser": false
+                    },
+                    "Window Manager": {
+                        "title": "Share Using Symphony",
+                        "FSBLHeader": false,
+                        "persistWindowState": true
+                    },
+                    "Toolbar": {
+                        "iconClass": "SymphonySharer",
+                        "iconURL": "http://localhost:3375/assets/img/Finsemble_Taskbar_Icon.png"
+                    }
+                }
+            }
         }
     }
 }

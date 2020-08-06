@@ -1,0 +1,61 @@
+/* css */
+@import url("../../../assets/css/_globals.css");
+
+body {
+    margin: 0px;
+    font-size: var(--procMonitor-font-size);
+    font-weight: var(--procMonitor-font-weight);
+    font-family: var(--font-family);
+    background-color: var(--procMonitor-background-color);
+    user-select: none;
+    background-color: var(--content-background-color);
+}
+
+h3 {
+  color: white;
+  text-align: center;
+}
+
+button {
+  text-align: center !important;
+  margin: 0px auto;
+  max-width: 2000px;
+  -webkit-appearance: none;
+  background-color: var(--button-affirmative-background-color);
+  color: #fff;
+  font-family: var(--font-family);
+  font-weight: 200;
+  font-size: 100%;
+  border: 0px;
+  border-radius: 4px;
+  vertical-align: middle;
+  transition: all 0.2s ease;
+  padding: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+button:hover {
+  background-color: var(--button-affirmative-background-hover-color);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+label{
+  color: white;
+}
+
+#shareText {
+  width: 97%;
+  height: 50px;
+  resize: none;
+}
+
+#chatList {
+  width: 99%;
+  height: 140px;
+}
+
+#sendBtn, #cancelBtn {
+    float: right;
+}

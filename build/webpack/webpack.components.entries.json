@@ -2,5 +2,9 @@
     "SymphonyTester": {
         "output": "components/SymphonyTester/SymphonyTester",
         "entry": "./src/components/SymphonyTester/SymphonyTester.js"
+    },
+    "SymphonySharer": {
+        "output": "components/SymphonySharer/SymphonySharer",
+        "entry": "./src/components/SymphonySharer/SymphonySharer.js"
     }
 }
