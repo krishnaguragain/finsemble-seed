@@ -3,8 +3,12 @@
         "output": "components/SymphonyTester/SymphonyTester",
         "entry": "./src/components/SymphonyTester/SymphonyTester.js"
     },
-    "SymphonySharer": {
-        "output": "components/SymphonySharer/SymphonySharer",
-        "entry": "./src/components/SymphonySharer/SymphonySharer.js"
+    "SymphonyAdvanceSharer": {
+        "output": "components/SymphonyAdvanceSharer/SymphonyAdvanceSharer",
+        "entry": "./src/components/SymphonyAdvanceSharer/SymphonyAdvanceSharer.js"
+    },
+    "SymphonySimpleShare": {
+        "output": "components/SymphonySimpleShare/SymphonySimpleShare",
+        "entry": "./src/components/SymphonySimpleShare/src/app.jsx"
     }
 }

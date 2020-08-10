@@ -240,9 +240,57 @@
                 }
             }
         },
-        "SymphonySharer": {
+        "SymphonyAdvanceSharer": {
             "window": {
-                "url": "$applicationRoot/components/SymphonySharer/SymphonySharer.html",
+                "url": "$applicationRoot/components/SymphonyAdvanceSharer/SymphonyAdvanceSharer.html",
+                "options": {
+                    "resizable": true,
+                    "autoShow": true,
+                    "alwaysOnTop": false
+                },
+                "top": "center",
+                "left": "center",
+                "width": 250,
+                "height": 350
+            },
+            "component": {
+                "preload": false,
+                "spawnOnStartup": false,
+                "singleton": false,
+                "showDevConsoleOnVisible": false
+            },
+            "foreign": {
+                "services": {
+                    "windowService": {
+                        "manageWindowMovement": true,
+                        "allowAutoArrange": true,
+                        "allowSnapping": true,
+                        "allowTabbing": true,
+                        "allowTiling": true,
+                        "allowGrouping": true,
+                        "allowMinimize": true
+                    },
+                    "workspace": {}
+                },
+                "components": {
+                    "App Launcher": {
+                        "launchableByUser": true
+                    },
+                    "Window Manager": {
+                        "alwaysOnTopIcon": true,
+                        "title": "SymphonyAdvanceSharer",
+                        "persistWindowState": true
+                    },
+                    "Toolbar": {
+                        "iconClass": "SymphonyAdvanceSharer",
+                        "iconURL": "http://localhost:3375/assets/img/Finsemble_Taskbar_Icon.png"
+                    }
+                }
+            }
+        },
+        "SymphonySimpleShare": {
+            "window": {
+                "url": "$applicationRoot/components/SymphonySimpleShare/SymphonySimpleShare.html",
                 "options": {
                     "resizable": false,
                     "autoShow": true,
@@ -274,7 +322,7 @@
                 },
                 "components": {
                     "App Launcher": {
-                        "launchableByUser": false
+                        "launchableByUser": true
                     },
                     "Window Manager": {
                         "title": "Share Using Symphony",
@@ -282,7 +330,7 @@
                         "persistWindowState": true
                     },
                     "Toolbar": {
-                        "iconClass": "SymphonySharer",
+                        "iconClass": "SymphonySimpleShare",
                         "iconURL": "http://localhost:3375/assets/img/Finsemble_Taskbar_Icon.png"
                     }
                 }

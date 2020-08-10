@@ -78,10 +78,9 @@ const FSBLReady = () => {
 
 const symphonyShare = (e) => {
 	let msg = document.getElementById('oboMsg').value
-	console.log(e)
 	if (msg != '') {
 		FSBL.Clients.LauncherClient.toggleWindowOnClick(document.getElementById('symphonyShareBtn'), {
-			componentType: 'SymphonySharer'
+			componentType: 'SymphonySimpleShare'
 		}, {
 			data: {
 				shareMsg: msg
