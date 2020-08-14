@@ -1,0 +1,145 @@
+/* css */
+@import url("../../../assets/css/_globals.css");
+
+body {
+    margin: 0px;
+    font-size: var(--procMonitor-font-size);
+    font-weight: var(--procMonitor-font-weight);
+    font-family: var(--font-family);
+    background-color: var(--procMonitor-background-color);
+    user-select: none;
+    background-color: var(--content-background-color);
+}
+
+h3 {
+  color: white;
+  text-align: center;
+}
+
+button {
+  text-align: center !important;
+  margin: 0px auto;
+  max-width: 2000px;
+  -webkit-appearance: none;
+  background-color: var(--button-affirmative-background-color);
+  color: #fff;
+  font-family: var(--font-family);
+  font-weight: 200;
+  font-size: 100%;
+  border: 0px;
+  border-radius: 4px;
+  vertical-align: middle;
+  transition: all 0.2s ease;
+  padding: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+button:hover {
+  background-color: var(--button-affirmative-background-hover-color);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+label{
+  color: white;
+  display: inline-block;
+  padding-top: 12px;
+}
+
+#shareText {
+  width: 97%;
+  height: 60px;
+  resize: none;
+}
+
+#chatList {
+  width: 99%;
+  height: 150px;
+}
+
+#sendBtn, #cancelBtn {
+    float: right;
+}
+
+/* Dropdown Button */
+.dropbtn {
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 50%;
+  }
+  
+  /* The container <div> - needed to position the dropdown content */
+  .dropdown {
+    float: right;
+    position: relative;
+  }
+  
+  /* Dropdown Content (Hidden by Default) */
+  .dropdown-content {
+    float: left;
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 130px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    left: -105px !important;
+  }
+  
+  /* Links inside the dropdown */
+  .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+  
+  /* Change color of dropdown links on hover */
+  .dropdown-content a:hover {background-color: #ddd;}
+  
+  /* Show the dropdown menu on hover */
+  .dropdown:hover .dropdown-content {display: block;}
+  
+  /* Change the background color of the dropdown button when the dropdown content is shown */
+  .dropdown:hover .dropbtn {background-color: #3e8e41;}
+
+  /* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+  
+  /* Modal Content/Box */
+  .modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    height: 60%; /* Could be more or less, depending on screen size */
+  }
+  
+  /* The Close Button */
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }

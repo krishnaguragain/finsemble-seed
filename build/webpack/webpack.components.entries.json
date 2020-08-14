@@ -10,5 +10,9 @@
     "SymphonySimpleShare": {
         "output": "components/SymphonySimpleShare/SymphonySimpleShare",
         "entry": "./src/components/SymphonySimpleShare/src/app.jsx"
+    },
+    "SymphonyAdvanceShare": {
+        "output": "components/SymphonyAdvanceShare/SymphonyAdvanceShare",
+        "entry": "./src/components/SymphonyAdvanceShare/src/app.jsx"
     }
 }

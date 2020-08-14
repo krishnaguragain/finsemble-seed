@@ -9,7 +9,8 @@ body {
     background-color: var(--procMonitor-background-color);
     user-select: none;
     background-color: var(--content-background-color);
-}
+    margin:2px
+  }
 
 h3 {
   color: white;
@@ -46,16 +47,19 @@ label{
 }
 
 #shareText {
-  width: 97%;
-  height: 50px;
+  width: 94%;
+  height: 40px;
   resize: none;
+  margin:5px
 }
 
 #chatList {
-  width: 99%;
-  height: 140px;
+  width: 96%;
+  height: 124px;
+  margin:5px
 }
 
 #sendBtn, #cancelBtn {
     float: right;
+    margin:5px
 }

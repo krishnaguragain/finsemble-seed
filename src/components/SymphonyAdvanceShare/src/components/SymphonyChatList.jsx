@@ -18,7 +18,7 @@ export default class SymphonyChatList extends React.Component {
     const {chatList} = this.props;
     return (
       <div>
-        <label>Chats</label>
+        <label className='chatLabel'>Chats</label>
         <select id="chatList" onChange={this.handleChange} multiple>
           {
             chatList.map((item) => (

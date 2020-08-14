@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>SymphonyAdvanceSharer</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" href="SymphonyAdvanceSharer.css" />
+    <script src="../../vendor.bundle.js"></script>
+    <script src="SymphonyAdvanceSharer.js"></script>
+  </head>
+  <body>
+    <h3>Share Using Symphony</h3>
+    <textarea id="shareText" readonly></textarea>
+    <div class="dropdown">
+      <button class="dropbtn">+</button>
+      <div class="dropdown-content">
+        <a id='newDirectChatLink'>New direct chat</a>
+        <a id='newChatRoomLink'>New chat room</a>
+      </div>
+    </div>
+
+    <label for="chatList">Chats</label>
+    <select id="chatList" multiple> </select>
+    <button type="button" id="sendBtn" disabled>Send</button>
+    <button type="button" id="cancelBtn">Cancel</button>
+
+    <div id="createDirectChatModal" class="modal">
+      <div class="modal-content">
+        <span class="close" id='closeCreateDirectChatModalSpan'>&times;</span>
+        <p>Create Direct Chat</p>
+        <input type='text' id='memberSearchText'></input>
+      </div>
+    </div>
+    <div id="createChatRoomModal" class="modal">
+      <div class="modal-content">
+        <span class="close" id='closeCreateChatRoomModalSpan'>&times;</span>
+        <p>Create Chat Room</p>
+      </div>
+    </div>
+  </body>
+</html>

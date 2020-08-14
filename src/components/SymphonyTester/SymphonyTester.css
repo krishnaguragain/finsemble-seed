@@ -29,6 +29,8 @@ body {
   height: 27%;
   color: white;
   font-size: 0.8rem;
+  padding-left: 7px;
+  padding-right: 7px;
 }
 
 #connectionDiv {
