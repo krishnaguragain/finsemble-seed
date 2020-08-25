@@ -3,8 +3,7 @@ import {
   SymphonyAdvanceShareDispatcher,
   SymphonyAdvanceShareActions,
 } from "../stores/SymphonyAdvanceShareStore";
-import ReactSelect from "react-select"
-
+import Select from "react-select";
 
 export default class SymphonyNewDirectChat extends React.Component {
   constructor(props) {
@@ -20,20 +19,17 @@ export default class SymphonyNewDirectChat extends React.Component {
     //window.addEventListener("blur", this.cancelBtnOnClick)
   }
 
-  onMemberSearchTextInput(e) {
-    console.log(e.selectedIndex)
-    if (e.target.value.length > 2) {
+  onMemberSearchTextInput(newValue) {
+    if (newValue.length > 2) {
       SymphonyAdvanceShareDispatcher.dispatch({
         type: SymphonyAdvanceShareActions.SEARCHMEMBER,
-        keyword: e.target.value,
+        keyword: newValue,
       });
-    } else {
-      SymphonyAdvanceShareStore.searchMemberResultList = [];
     }
   }
-  
-  onMemberOptionClick(){
-    console.log('onMemberOptionClick')
+
+  onMemberOptionClick(neValue) {
+    console.log(neValue);
   }
 
   render() {
@@ -53,7 +49,14 @@ export default class SymphonyNewDirectChat extends React.Component {
           </span>
           <p>Create Direct Chat</p>
           <label> Members (required)</label>
-          <input
+          <Select
+            options={SymphonyAdvanceShareStore.searchMemberResultList}
+            onInputChange={this.onMemberSearchTextInput}
+            getOptionLabel={({ displayName,  company}) => displayName+', '+company}
+            getOptionValue={({ id }) => id}
+            onChange={this.onMemberOptionClick}
+          />
+          {/* <input
             type="text"
             id="memberSearchText"
             placeholder="Enter name or emails"
@@ -66,7 +69,7 @@ export default class SymphonyNewDirectChat extends React.Component {
                 {item.company}
               </option>
             ))}
-          </datalist>
+          </datalist> */}
         </div>
       </div>
     );
