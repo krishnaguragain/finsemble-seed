@@ -10,127 +10,11 @@ body {
   background-color: var(--content-background-color);
 }
 
-#container, #sendMsgDiv{
+#container {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  height: 100%;
-}
-
-#createGroupDiv {
-  display: none;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  height: 100%;
-}
-
-#headerDiv {
-  width: 100%;
-  height: 27%;
-  color: white;
-  font-size: 0.8rem;
-  padding-left: 7px;
-  padding-right: 7px;
-}
-
-#connectionDiv {
-  color: white;
-  width: 47%;
-  height: 40%;
-  padding: 5px;
-}
-
-#createChatBtn {
-  float: right;
-  display: none;
-}
-
-#createChatroomBtn, #backBtn{
-  float: right;
-}
-
-#chatsDiv {
-  color: white;
-  width: 47%;
-  height: 40%;
-  padding: 5px;
-}
-
-.halfcol {
-  color: white;
-  width: 47%;
-  height: 100%;
-  padding: 5px;
-  margin-left: auto;
-  margin-right: 0;
-}
-
-#funcContainer {
-  color: white;
-  width: 98%;
-  height: 40%;
-  padding: 5px;
-  vertical-align: right;
-}
-
-#resultDiv {
-  width: 100%;
-  height: 25%;
-  padding: 7px;
-}
-
-#searchUsersDiv {
-  display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-}
-
-#searchUsersTxt {
-  width: 60%;
-}
-
-#memberList {
-  width: 100%;
-  height: 75%;
-}
-
-#searchUsersResult {
-  width: 100%;
-  height: 75%;
-}
-
-#externalConnections, #internalConnections{
-  width: 100%;
-  height: 90%;
-}
-
-#connections {
-  width: 99%;
-}
-#chatsSelect {
-  width: 99%;
-}
-#oboMsgBtn,
-#shareChartBtn {
-  float: right;
-}
-#tickerText {
-  width: 97%;
-}
-
-#oboMsg {
-  width: 97%;
-  height: 80px;
-  resize: none;
-}
-
-.main {
-  display: inline-block;
-}
-
-#chats {
-  width: 150px;
 }
 
 .spacer1 {
@@ -152,37 +36,25 @@ body {
 h1 {
   font-weight: var(--font-weight-1);
   color: var(--procMonitor-font-color);
-  text-align: center;
-}
-
-h4 {
-  font-weight: var(--font-weight-3);
-  color: var(--procMonitor-font-color);
-  text-align: center;
-  margin-block-start: 1px;
-  margin-block-end: 1px;
-  width: 100%;
 }
 
 button {
-  text-align: center !important;
-  margin: 0px auto;
+  text-align: center;
+  margin-left: 10px;
   max-width: 2000px;
   -webkit-appearance: none;
   background-color: var(--button-affirmative-background-color);
   color: #fff;
   font-family: var(--font-family);
-  font-weight: 200;
-  font-size: 100%;
+  font-size: 14px;
   border: 0px;
-  border-radius: 4px;
+  border-radius: 12px;
+  padding-left: 8px;
+  padding-right: 8px;
   vertical-align: middle;
   transition: all 0.2s ease;
-  padding: 5px;
-  padding-left: 10px;
-  padding-right: 10px;
+  float: right;
 }
-
 button:hover {
   background-color: var(--button-affirmative-background-hover-color);
   cursor: pointer;
@@ -196,41 +68,69 @@ button:hover {
   width: 140px;
 }
 
-#resultMsg {
-  width: 98%;
-  height: 100%;
-  resize: none;
+#warningMsg1 {
+  color: #f26666;
+  margin-top: 10px;
+  margin-bottom: 0px;
 }
 
-/* Style the tab */
-.tab {
-  overflow: hidden;
+#warningMsg2 {
+  color: #acb2c0;
+  padding-left: 40px;
+  padding-right: 40px;
+  margin-top: 10px;
+  margin-bottom: 0px;
+  text-align: center;
 }
 
-/* Style the buttons inside the tab */
-.tab button {
+.rowDiv {
+  margin-top: 15px;
+  padding-left: 20px;
+  padding-right: 20px;
+  width: 90%;
+}
+
+.label {
+  color: #42a5ba;
   float: left;
-  border: 1px solid black;
-  outline: none;
-  cursor: pointer;
-  padding: 5px 5px;
-  transition: 0.3s;
-  font-size: 12px;
-  border-radius: 0px;
+  font-size: 14px;
 }
 
-/* Change background color of buttons on hover */
-.tab button:hover {
-  background-color: #ddd;
+#chatsSelect {
+  float: right;
+  width: 150px;
+  border-radius: 12px;
+  color: white;
+  background-color: #696969;
 }
 
-/* Create an active/current tablink class */
-.tab button.active {
-  background-color: #ccc;
+#tickerText {
+  float: right;
+  width: 90px;
+  border-radius: 12px;
+  background-color: black;
+  color: grey;
+}
+#functionDiv {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-/* Style the tab content */
-.tabcontent {
-  display: none;
-  height: 40%;
+#newDirectChartBtn,
+#newChatRoomBtn {
+  width: 100%;
+  text-align: left;
+  background-color: var(--procMonitor-background-color);
+  color: #42a5ba;
+}
+
+#oboMsg {
+  width: 100%;
+  height: 40px;
+  border-radius: 12px;
+  background-color: black;
+  color: grey;
 }

@@ -12,89 +12,46 @@
   </head>
   <body>
     <div id="container">
-      <div id="headerDiv">
-        <h1>SymphonyTester</h1>
-        <p>
-          <b>Warning! Read before using the OBO function!</b>
-        </p>
-        <p>
-          This <b>Send OBO Message</b> will send OBO message using the Symphony
-          username provided in the code to your actual Symphony chat. Please use
-          it carefully!
-        </p>
-      </div>
-      <div id="funcContainer">
-        <div id="sendMsgDiv">
-          <div class="halfcol">
-            <label for="chatsSelect">Chats</label>
-            <select id="chatsSelect" name="chatsSelect"></select>
-            <br /><br /><br />
-            <button id="newDirectChartBtn">+ New Direct Chat</button>
-            <br /><br />
-            <button id="newChatRoomBtn">+ New Chat Room</button>
-          </div>
-          <div class="halfcol">
-            <label for="tickerText">Share Chart</label>
-            <input type="text" id="tickerText" placeholder="Input a ticker" />
-            <button type="button" id="shareChartBtn">Share</button>
-            <br /><br /><br />
-            <label for="oboMsg">OBO Message</label>
-            <textarea id="oboMsg" placeholder="Input your message"></textarea>
-            <button type="button" id="symphonyShareBtn">Symphony Share</button>
-            <button type="button" id="oboMsgBtn">Send</button>
-          </div>
+      <div class="spacer2"></div>
+      <img
+        src="../../assets/img/finsembleDarkBG_noText.png"
+        id="finsembleLogo"
+        height="60"
+      />
+      <p id="warningMsg1">
+        <b>Warning! Read before using the OBO function!</b>
+      </p>
+      <p id="warningMsg2">
+        This <b>OBO Message</b> and <b>Share Chart</b>will send actual message
+        using the Symphony username provided in the code to your actual Symphony
+        chat. <br />
+        <b>Please use it carefully!</b>
+      </p>
+      <div class="spacer2"></div>
+      <div id="functionDiv">
+        <div class="rowDiv">
+          <label class="label" for="chatsSelect"><b>Chats</b></label>
+          <select id="chatsSelect" name="chatsSelect"></select>
         </div>
-        <div id="createGroupDiv">
-          <h4 id='createHeader'>New Direct Chat</h4>
-          <div class="halfcol">
-            <div id="chatroomNameDiv">
-              <label for="chatroomText">Chatroom Name</label>
-              <input id="chatroomText" placeholder="Input Chatroom name" />
-              <br /><br />
-            </div>
-
-            <label for="tab">Select Member</label>
-            <div class="tab">
-              <button class="tablinks" id="internalTab">Internal</button>
-              <button class="tablinks" id="externalTab">External</button>
-              <button class="tablinks" id="searchTab">Search</button>
-            </div>
-
-            <div id="internalTabDiv" class="tabcontent">
-              <select
-                id="internalConnections"
-                name="internalConnections"
-                multiple
-              >
-              </select>
-            </div>
-
-            <div id="externalTabDiv" class="tabcontent">
-              <select
-                id="externalConnections"
-                name="externalConnections"
-                multiple
-              >
-              </select>
-            </div>
-
-            <div id="searchTabDiv" class="tabcontent">
-              <input id="searchUsersTxt" />
-              <button id="searchUsersBtn">Search</button>
-              <select name="searchUsersResult" id="searchUsersResult" multiple></select>
-            </div>
-          </div>
-          <div class="halfcol">
-            <label for="memberList">Members</label>
-            <select name="memberList" id="memberList" multiple> </select>
-            <button id="createChatBtn">Create</button>
-            <button id="createChatroomBtn">Create</button>
-            <button id="backBtn">Back</button>
-          </div>
+        <div class="rowDiv">
+          <label class="label" for="tickerText"><b>Share a Chart</b></label>
+          <button type="button" id="shareChartBtn">Share</button>
+          <input type="text" id="tickerText" placeholder="Input a ticker" />
+        </div>
+        <div class="rowDiv">
+          <button id="newDirectChartBtn"><b>+ New Direct Chat</b></button>
+        </div>
+        <div class="rowDiv">
+          <button id="newChatRoomBtn"><b>+ New Chat Room</b></button>
+        </div>
+        <div class="rowDiv">
+          <label class="label" for="oboMsg"><b>OBO Message</b></label>
+          <br/> <br/>
+          <textarea id="oboMsg" placeholder="Input your message"></textarea>
+          <button type="button" id="oboMsgBtn">Send</button>
         </div>
       </div>
-
-      <div id="resultDiv">
+      <div class="rowDiv" id="resultDiv">
         <textarea id="resultMsg" readonly></textarea>
       </div>
     </div>
