@@ -54,6 +54,7 @@ button {
   vertical-align: middle;
   transition: all 0.2s ease;
   float: right;
+  font-weight: var(--font-weight-2);
 }
 button:hover {
   background-color: var(--button-affirmative-background-hover-color);
@@ -69,13 +70,14 @@ button:hover {
 }
 
 #warningMsg1 {
-  color: #f26666;
+  color: var(--accent-negative);
   margin-top: 10px;
   margin-bottom: 0px;
+  font-weight: var(--font-weight-2);
 }
 
 #warningMsg2 {
-  color: #acb2c0;
+  color: var(--core-primary-5);
   padding-left: 40px;
   padding-right: 40px;
   margin-top: 10px;
@@ -91,25 +93,26 @@ button:hover {
 }
 
 .label {
-  color: #42a5ba;
+  color: var(--accent-primary);
   float: left;
-  font-size: 14px;
+  font-size: var(--toolbar-brand-logo-width);
+  font-weight: var(--font-weight-2);
 }
 
 #chatsSelect {
   float: right;
   width: 150px;
   border-radius: 12px;
-  color: white;
-  background-color: #696969;
+  color: var(--font-color);
+  background-color: var(--core-primary-4);
 }
 
 #tickerText {
   float: right;
   width: 90px;
   border-radius: 12px;
-  background-color: black;
-  color: grey;
+  background-color: var(--core-primary);
+  color: var(--core-primary-4);
 }
 #functionDiv {
   width: 100%;
@@ -124,13 +127,44 @@ button:hover {
   width: 100%;
   text-align: left;
   background-color: var(--procMonitor-background-color);
-  color: #42a5ba;
+  color: var(--accent-primary);
 }
 
 #oboMsg {
   width: 100%;
   height: 40px;
   border-radius: 12px;
-  background-color: black;
-  color: grey;
+  background-color: var(--core-primary);
+  color: var(--core-primary-4);
+}
+
+.accordion {
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  padding-left: 20px;
+  padding-right: 20px;
+  width: 90%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+  transition: 0.4s;
+  border-radius: 5px;
+  padding-left: 0px;
+  padding-right: 0px;
+  margin-left: 0px;
+  margin-top: 15px;
+}
+
+.active, .accordion:hover {
+  background-color: #ccc;
+}
+
+.panel {
+  padding: 0 18px;
+  background-color: white;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
 }
