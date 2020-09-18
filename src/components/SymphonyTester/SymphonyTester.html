@@ -12,49 +12,78 @@
   </head>
   <body>
     <div id="container">
-      <div class="spacer2"></div>
+      <div class="spacer4"></div>
       <img
         src="../../assets/img/finsembleDarkBG_noText.png"
         id="finsembleLogo"
-        height="60"
+        height="50"
       />
-      <p id="warningMsg1">
-        Warning! Read before using the OBO function!
-      </p>
+      <p id="warningMsg1">Warning! Read before using the OBO function!</p>
       <p id="warningMsg2">
         This <b>OBO Message</b> and <b>Share Chart</b>will send actual message
         using the Symphony username provided in the code to your actual Symphony
         chat. <br />
         <b>Please use it carefully!</b>
       </p>
-      <div class="spacer2"></div>
-      <div id="functionDiv">
-        <div class="rowDiv">
-          <label class="label" for="chatsSelect">Chats</label>
-          <select id="chatsSelect" name="chatsSelect"></select>
+
+      <div class="rowDiv" id='selectChatPanel'>
+        <label class="label" for="chatsSelect">Chats</label>
+        <select id="chatsSelect" name="chatsSelect"></select>
+      </div>
+      <div class="rowDiv" id='tickerPanel'>
+        <label class="label" for="tickerText">Share a Chart</label>
+        <button type="button" id="shareChartBtn">Share</button>
+        <input type="text" id="tickerText" placeholder="Ticker" />
+      </div>
+
+      <button class="accordion" id="newDirectChatAcc">New Direct Chat</button>
+      <button class="accordion" id="newChatroomAcc">New Chat Room</button>
+      <div class="panel" id="newChatroomPanel">
+        <div class="spacer4"></div>
+        <label class="label1" for="chatroomText">Chatroom Name</label>
+        <input id="chatroomText" placeholder="Chatroom name" />
+      </div>
+      <div class="panel" id="newDirectChatPanel">
+        <div class="spacer4"></div>
+        <div class="col60">
+          <label class="label1" for="tab">Select Member</label>
+          <div class="tab">
+            <button class="tabBtn" id="internalTab">Internal</button>
+            <button class="tabBtn" id="externalTab">External</button>
+          </div>
+          <div>
+            <button class="tabBtn" id="searchContactBtn">Search</button>
+            <input
+              type="text"
+              id="memberSearchText"
+              placeholder="Name"
+            />
+            <select
+              id="connectionResult"
+              name="connectionResult"
+              multiple
+            ></select>
+          </div>
         </div>
-        <div class="rowDiv">
-          <label class="label" for="tickerText">Share a Chart</label>
-          <button type="button" id="shareChartBtn">Share</button>
-          <input type="text" id="tickerText" placeholder="Input a ticker" />
-        </div>
-        <button class="accordion">New Direct Chat</button>
-        <div class="rowDiv panel">
-          <button id="newDirectChartBtn">+ New Direct Chat</button>
-        </div>
-        <button class="accordion">New Chat Room</button>
-        <div class="rowDiv panel">
-          <button id="newChatRoomBtn">+ New Chat Room</button>
-        </div>
-        <button class="accordion">OBO Message</button>
-        <div class="rowDiv panel">
-          <br/> <br/>
-          <textarea id="oboMsg" placeholder="Input your message"></textarea>
-          <button type="button" id="oboMsgBtn">Send</button>
+        <div class="col40">
+          <label class="label1" for="memberList">Members</label>
+          <select name="memberList" id="memberList" multiple></select>
+          <button id="createChatBtn">Create</button>
+          <button id="createChatroomBtn">Create</button>
         </div>
       </div>
-      <button class="accordion">Console</button>
-      <div class="rowDiv panel" id="resultDiv">
+
+      <button class="accordion" id="messageAcc">OBO Message</button>
+      <div class="panel" id='messagePanel'>
+        <textarea id="oboMsg" placeholder="Input your message"></textarea>
+        
+        <button type="button" id="oboMsgBtn">Send</button>
+        <button type="button" id="simpleShareBtn">Simple Share</button>
+        <button type="button" id="advanceShareBtn">Advance Share</button>
+      </div>
+
+      <button class="accordion" id="consoleAcc">Console</button>
+      <div class="panel" id="resultPanel">
         <textarea id="resultMsg" readonly></textarea>
       </div>
     </div>

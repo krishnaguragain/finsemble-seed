@@ -30,7 +30,7 @@ body {
 }
 
 .spacer4 {
-  height: 0px;
+  height: 10px;
 }
 
 h1 {
@@ -40,26 +40,32 @@ h1 {
 
 button {
   text-align: center;
-  margin-left: 10px;
   max-width: 2000px;
+  margin-left: 10px;
   -webkit-appearance: none;
   background-color: var(--button-affirmative-background-color);
   color: #fff;
   font-family: var(--font-family);
-  font-size: 14px;
+  font-size: var(--toolbar-font-size);
   border: 0px;
   border-radius: 12px;
-  padding-left: 8px;
-  padding-right: 8px;
   vertical-align: middle;
   transition: all 0.2s ease;
   float: right;
-  font-weight: var(--font-weight-2);
+  font-weight: var(--font-weight-4);
 }
+
 button:hover {
   background-color: var(--button-affirmative-background-hover-color);
   cursor: pointer;
   transition: all 0.2s ease;
+}
+
+input,
+select {
+  border-radius: 12px;
+  background-color: var(--core-primary);
+  color: var(--core-primary-4);
 }
 
 #quitFS {
@@ -99,6 +105,13 @@ button:hover {
   font-weight: var(--font-weight-2);
 }
 
+.label1 {
+  color: var(--accent-primary);
+  float: left;
+  font-size: var(--toolbar-brand-logo-width);
+  font-weight: var(--font-weight-2);
+}
+
 #chatsSelect {
   float: right;
   width: 150px;
@@ -110,10 +123,8 @@ button:hover {
 #tickerText {
   float: right;
   width: 90px;
-  border-radius: 12px;
-  background-color: var(--core-primary);
-  color: var(--core-primary-4);
 }
+
 #functionDiv {
   width: 100%;
   display: flex;
@@ -139,8 +150,9 @@ button:hover {
 }
 
 .accordion {
-  background-color: #eee;
-  color: #444;
+  margin-top: 15px;
+  background-color: var(--core-primary-4);
+  color: var(--accent-primary);
   cursor: pointer;
   padding-left: 20px;
   padding-right: 20px;
@@ -155,16 +167,87 @@ button:hover {
   padding-right: 0px;
   margin-left: 0px;
   margin-top: 15px;
+  font-weight: var(--font-weight-2);
 }
 
-.active, .accordion:hover {
-  background-color: #ccc;
+.active,
+.accordion:hover {
+  background-color: var(--core-primary-5);
 }
 
 .panel {
+  float: left;
   padding: 0 18px;
-  background-color: white;
+  background-color: var(--content-background-color);
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.2s ease-out;
+  padding-left: 20px;
+  padding-right: 20px;
+  width: 90%;
+}
+
+#resultMsg {
+  width: 98%;
+  height: 70px;
+  resize: none;
+}
+
+.col60 {
+  float: left;
+  width: 57%;
+  height: 100%;
+  margin-left: auto;
+  margin-right: 0;
+}
+
+.col40 {
+  float: left;
+  width: 37%;
+  height: 100%;
+  padding: 5px;
+  margin-left: auto;
+  margin-right: 0;
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+  float: left;
+  border: 1px solid black;
+  outline: none;
+  cursor: pointer;
+  padding: 5px 5px;
+  transition: 0.3s;
+  font-size: 10px;
+  margin-left: 1px;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: #ccc;
+}
+
+#memberSearchText {
+  width: 65%;
+  margin-top: 10px;
+}
+
+#searchContactBtn {
+  margin-top: 10px;
+}
+
+#connectionResult {
+  margin-top: 10px;
+  width: 100%;
+  height: 200px;
+}
+
+#memberList {
+  width: 100%;
+  height: 220px;
 }

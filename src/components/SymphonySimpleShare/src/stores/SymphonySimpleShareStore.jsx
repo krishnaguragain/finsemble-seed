@@ -3,7 +3,7 @@ Dispatcher = new Dispatcher();
 
 var EventEmitter = require("events").EventEmitter;
 var assign = require("object-assign");
-var request = require("superagent");
+
 const constants = {
   symphonyServiceTopic: "symphonyService",
   symphonyQueryFunctionConfig: {

@@ -22,16 +22,65 @@ const FSBLReady = () => {
 	try {
 
 		var acc = document.getElementsByClassName("accordion");
-		var i;
-
-		for (i = 0; i < acc.length; i++) {
+		for (var i = 0; i < acc.length; i++) {
 			acc[i].addEventListener("click", function () {
 				this.classList.toggle("active");
-				var panel = this.nextElementSibling;
-				if (panel.style.maxHeight) {
-					panel.style.maxHeight = null;
-				} else {
-					panel.style.maxHeight = panel.scrollHeight + "px";
+				switch (this.id) {
+					case 'newDirectChatAcc':
+						document.getElementById('createChatBtn').style.display = 'block'
+						document.getElementById('createChatroomBtn').style.display = 'none'
+						var panel = document.getElementById('newDirectChatPanel')
+						if (panel.style.maxHeight) {
+							panel.style.maxHeight = null;
+							document.getElementById('selectChatPanel').style.display = 'block'
+							document.getElementById('tickerPanel').style.display = 'block'
+							document.getElementById('messageAcc').style.display = 'block'
+							document.getElementById('consoleAcc').style.display = 'block'
+							document.getElementById('newChatroomAcc').style.display = 'block'
+						} else {
+							document.getElementById('selectChatPanel').style.display = 'none'
+							document.getElementById('tickerPanel').style.display = 'none'
+							document.getElementById('messageAcc').style.display = 'none'
+							document.getElementById('consoleAcc').style.display = 'none'
+							document.getElementById('newChatroomAcc').style.display = 'none'
+							document.getElementById('newDirectChatPanel').style.maxHeight = document.getElementById('newDirectChatPanel').scrollHeight + "px";
+							document.getElementById('newChatroomPanel').style.maxHeight = null;
+							document.getElementById('messagePanel').style.maxHeight = null;
+							document.getElementById('resultPanel').style.maxHeight = null;
+						}
+						break;
+					case 'newChatroomAcc':
+						document.getElementById('createChatBtn').style.display = 'none'
+						document.getElementById('createChatroomBtn').style.display = 'block'
+						var panel = document.getElementById('newDirectChatPanel')
+						if (panel.style.maxHeight) {
+							panel.style.maxHeight = null;
+							document.getElementById('newChatroomPanel').style.maxHeight = null;
+							document.getElementById('selectChatPanel').style.display = 'block'
+							document.getElementById('tickerPanel').style.display = 'block'
+							document.getElementById('messageAcc').style.display = 'block'
+							document.getElementById('consoleAcc').style.display = 'block'
+							document.getElementById('newDirectChatAcc').style.display = 'block'
+						} else {
+							document.getElementById('selectChatPanel').style.display = 'none'
+							document.getElementById('tickerPanel').style.display = 'none'
+							document.getElementById('messageAcc').style.display = 'none'
+							document.getElementById('consoleAcc').style.display = 'none'
+							document.getElementById('newDirectChatAcc').style.display = 'none'
+							document.getElementById('newDirectChatPanel').style.maxHeight = document.getElementById('newDirectChatPanel').scrollHeight + "px";
+							document.getElementById('newChatroomPanel').style.maxHeight = document.getElementById('newChatroomPanel').scrollHeight + "px";
+							document.getElementById('messagePanel').style.maxHeight = null;
+							document.getElementById('resultPanel').style.maxHeight = null;
+						}
+						break;
+					default:
+						var panel = this.nextElementSibling;
+						if (panel.style.maxHeight) {
+							panel.style.maxHeight = null;
+						} else {
+							panel.style.maxHeight = panel.scrollHeight + "px";
+						}
+						break;
 				}
 			});
 		}
@@ -52,38 +101,37 @@ const FSBLReady = () => {
 		retrieveSymphonyStream()
 
 		// List user's connection
-		listExternalConnections()
-		listInternalConnections()
+		// listExternalConnections()
+		// listInternalConnections()
 
 		// Register onclick function to oboMsgBtn
 		document.getElementById('oboMsgBtn').onclick = sendOboMsg
 
-		document.getElementById('symphonyShareBtn').onclick = symphonyShare
+		document.getElementById('simpleShareBtn').onclick = symphonyShare
 
 
 
 		// Register onclick function to oboMsgBtn
-		document.getElementById('searchUsersBtn').onclick = searchUsers
+		document.getElementById('searchContactBtn').onclick = searchUsers
 
 		// Register onclick function to createIMBtn
 		document.getElementById('createChatBtn').onclick = createIM
 		document.getElementById('createChatroomBtn').onclick = createChatroom
 
-		document.getElementById('newDirectChartBtn').onclick = newDirectChart
-		document.getElementById('newChatRoomBtn').onclick = newChatRoom
-		document.getElementById('backBtn').onclick = back
+		//document.getElementById('newDirectChatBtn').onclick = newDirectChart
+		//document.getElementById('newChatRoomBtn').onclick = newChatRoom
 
 		// Register Tab function
-		document.getElementById('internalTab').onclick = tabcontent
-		document.getElementById('externalTab').onclick = tabcontent
-		document.getElementById('searchTab').onclick = tabcontent
-		document.getElementById('internalTab').click()
+		// document.getElementById('internalTab').onclick = tabcontent
+		// document.getElementById('externalTab').onclick = tabcontent
+		// //document.getElementById('searchTab').onclick = tabcontent
+		// document.getElementById('internalTab').click()
 
-		// Register dbClick func to select user result
-		document.getElementById('externalConnections').ondblclick = memberSelected
-		document.getElementById('internalConnections').ondblclick = memberSelected
-		document.getElementById('searchUsersResult').ondblclick = memberSelected
-		document.getElementById('memberList').ondblclick = memberUnselected
+		// // Register dbClick func to select user result
+		// document.getElementById('externalConnections').ondblclick = memberSelected
+		// document.getElementById('internalConnections').ondblclick = memberSelected
+		// document.getElementById('searchUsersResult').ondblclick = memberSelected
+		// document.getElementById('memberList').ondblclick = memberUnselected
 
 		// Register click func to shareBtn
 		document.getElementById('shareChartBtn').onclick = shareChart
