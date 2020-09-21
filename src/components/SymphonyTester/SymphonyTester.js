@@ -100,10 +100,6 @@ const FSBLReady = () => {
 		// Retrieve existing symphony streams
 		retrieveSymphonyStream()
 
-		// List user's connection
-		// listExternalConnections()
-		// listInternalConnections()
-
 		// Register onclick function to oboMsgBtn
 		document.getElementById('oboMsgBtn').onclick = sendOboMsg
 
@@ -118,20 +114,14 @@ const FSBLReady = () => {
 		document.getElementById('createChatBtn').onclick = createIM
 		document.getElementById('createChatroomBtn').onclick = createChatroom
 
-		//document.getElementById('newDirectChatBtn').onclick = newDirectChart
-		//document.getElementById('newChatRoomBtn').onclick = newChatRoom
 
 		// Register Tab function
-		// document.getElementById('internalTab').onclick = tabcontent
-		// document.getElementById('externalTab').onclick = tabcontent
-		// //document.getElementById('searchTab').onclick = tabcontent
-		// document.getElementById('internalTab').click()
+		document.getElementById('internalTab').onclick = searchMembers
+		document.getElementById('externalTab').onclick = searchMembers
 
 		// // Register dbClick func to select user result
-		// document.getElementById('externalConnections').ondblclick = memberSelected
-		// document.getElementById('internalConnections').ondblclick = memberSelected
-		// document.getElementById('searchUsersResult').ondblclick = memberSelected
-		// document.getElementById('memberList').ondblclick = memberUnselected
+		document.getElementById('connectionResult').ondblclick = memberSelected
+		document.getElementById('memberList').ondblclick = memberUnselected
 
 		// Register click func to shareBtn
 		document.getElementById('shareChartBtn').onclick = shareChart
@@ -181,47 +171,6 @@ const memberSelected = (e) => {
 	}
 }
 
-const newDirectChart = (e) => {
-	document.getElementById('chatroomNameDiv').style.display = 'none'
-	document.getElementById('sendMsgDiv').style.display = 'none'
-	document.getElementById('createGroupDiv').style.display = 'flex'
-
-	document.getElementById('internalTabDiv').style.height = '80%';
-	document.getElementById('externalTabDiv').style.height = '80%';
-	document.getElementById('searchTabDiv').style.height = '80%';
-
-	document.getElementById('createChatBtn').style.display = 'block'
-	document.getElementById('createChatroomBtn').style.display = 'none'
-
-	document.getElementById('createHeader').innerHTML = 'New Direct Chat'
-	document.getElementById('internalTab').click()
-}
-
-const newChatRoom = () => {
-	document.getElementById('chatroomNameDiv').style.display = 'block'
-	document.getElementById('sendMsgDiv').style.display = 'none'
-	document.getElementById('createGroupDiv').style.display = 'flex'
-
-	document.getElementById('internalTabDiv').style.height = '55%';
-	document.getElementById('externalTabDiv').style.height = '55%';
-	document.getElementById('searchTabDiv').style.height = '55%';
-
-	document.getElementById('createChatBtn').style.display = 'none'
-	document.getElementById('createChatroomBtn').style.display = 'block'
-
-	document.getElementById('createHeader').innerHTML = 'New Chat room'
-	document.getElementById('internalTab').click()
-}
-
-const back = () => {
-	document.getElementById('sendMsgDiv').style.display = 'flex'
-	document.getElementById('createGroupDiv').style.display = 'none'
-	selectedMemberList = []
-	document.getElementById('memberList').innerHTML = ''
-	document.getElementById('searchUsersResult').innerHTML = ''
-	document.getElementById('searchUsersTxt').value = ''
-}
-
 const addOption = ((elementId, name, value) => {
 	let chatsSelect = document.getElementById(elementId)
 	let tmpOption = document.createElement("option");
@@ -230,18 +179,21 @@ const addOption = ((elementId, name, value) => {
 	chatsSelect.add(tmpOption);
 })
 
-const tabcontent = (e) => {
-	var i, tabcontent, tablinks;
-	tabcontent = document.getElementsByClassName("tabcontent");
-	for (i = 0; i < tabcontent.length; i++) {
-		tabcontent[i].style.display = "none";
+const removeAllOptions = ((elementId) => {
+	var select = document.getElementById(elementId);
+	var length = select.options.length;
+	for (i = length - 1; i >= 0; i--) {
+		select.options[i] = null;
 	}
-	tablinks = document.getElementsByClassName("tablinks");
-	for (i = 0; i < tablinks.length; i++) {
-		tablinks[i].className = tablinks[i].className.replace(" active", "");
+})
+
+const searchMembers = (e) => {
+	removeAllOptions('connectionResult')
+	if (e.target.id == 'internalTab') {
+		listInternalConnections()
+	} else if (e.target.id == 'externalTab') {
+		listExternalConnections()
 	}
-	document.getElementById(e.srcElement.id + 'Div').style.display = "block";
-	e.currentTarget.className += " active";
 }
 
 // Retrieve all existing Symphony Stream
@@ -333,7 +285,7 @@ const listExternalConnections = () => {
 					if (!error) {
 						let memberInfo = queryResponseMessage.data.memberInfo.users
 						memberInfo.forEach(member => {
-							addOption('externalConnections', member.displayName + ', ' + member.company, member.id)
+							addOption('connectionResult', member.displayName + ', ' + member.company, member.id)
 						})
 
 					}
@@ -354,7 +306,7 @@ const listInternalConnections = () => {
 			users.forEach(user => {
 				let userDisplayName = user.displayName + ', ' + user.company
 				let usedId = user.id
-				addOption('internalConnections', userDisplayName, usedId)
+				addOption('connectionResult', userDisplayName, usedId)
 			})
 		}
 	});
@@ -362,7 +314,8 @@ const listInternalConnections = () => {
 
 // Search users by keywords
 const searchUsers = () => {
-	let query = document.getElementById('searchUsersTxt').value
+	removeAllOptions('connectionResult')
+	let query = document.getElementById('memberSearchText').value
 	if (query != '') {
 		FSBL.Clients.RouterClient.query(symphonyServiceTopic, {
 			function: symphonyQueryFunctionConfig.searchUsers,
@@ -373,7 +326,7 @@ const searchUsers = () => {
 				users.forEach(user => {
 					let userDisplayName = user.displayName + ', ' + user.company
 					let usedId = user.id
-					addOption('searchUsersResult', userDisplayName, usedId)
+					addOption('connectionResult', userDisplayName, usedId)
 				})
 			}
 		});
@@ -396,11 +349,14 @@ const createIM = (e) => {
 		}, (error, queryResponseMessage) => {
 			if (!error) {
 				setDisplayMsg('New IM Created.', {})
-				back()
+				document.getElementById('newDirectChatAcc').click()
 				let id = queryResponseMessage.data.id
+				selectedMemberList = []
 				retrieveSymphonyStream()
 					.then(() => {
 						document.getElementById('chatsSelect').value = id
+						removeAllOptions('connectionResult')
+						removeAllOptions('memberList')
 					})
 			}
 		});
@@ -475,11 +431,14 @@ const createChatroom = () => {
 	}, (error, queryResponseMessage) => {
 		if (!error) {
 			setDisplayMsg('New Chartroom created.', queryResponseMessage.data)
-			back()
+			document.getElementById('newChatroomAcc').click()
 			let id = queryResponseMessage.data.room.roomSystemInfo.id
+			selectedMemberList = []
 			retrieveSymphonyStream()
 				.then(() => {
 					document.getElementById('chatsSelect').value = id
+					removeAllOptions('connectionResult')
+					removeAllOptions('memberList')
 				})
 		}
 	});
