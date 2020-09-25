@@ -2,6 +2,7 @@ var Dispatcher = require("flux").Dispatcher;
 Dispatcher = new Dispatcher();
 
 var EventEmitter = require("events").EventEmitter;
+const { S_IFREG } = require("constants");
 var assign = require("object-assign");
 
 const constants = {
@@ -15,6 +16,8 @@ const constants = {
     listConnections: "listConnections",
     createRoom: "createRoom",
     share: "share",
+    getSymphonyUserInfo: "getSymphonyUserInfo",
+    advSearchUsers: "advSearchUsers",
   },
 };
 
@@ -27,7 +30,25 @@ var SymphonyAdvanceShareStore = assign({}, EventEmitter.prototype, {
       this.emit("change");
     }
 
+    FSBL.Clients.RouterClient.query(
+      constants.symphonyServiceTopic,
+      {
+        function: constants.symphonyQueryFunctionConfig.getSymphonyUserInfo,
+      },
+      (err, queryResponseMessage) => {
+        if (!err) {
+          this.symphonyUserInfo = queryResponseMessage.data.symphonyUserInfo;
+        } else {
+          FSBL.Clients.Logger.error(err);
+        }
+      }
+    );
+
     // retrieve symphony streams
+    this.retrieveSymphonyStream();
+  },
+
+  retrieveSymphonyStream: function () {
     FSBL.Clients.RouterClient.query(
       constants.symphonyServiceTopic,
       {
@@ -110,14 +131,20 @@ var SymphonyAdvanceShareStore = assign({}, EventEmitter.prototype, {
       }
     );
   },
+
+  symphonyUserInfo: {},
   streamList: [],
   shareMsg: "",
-  searchMemberResultList:[]
+  searchMemberResultList: [],
+  connectionResultList: [],
+  selectStreamId: "",
 });
 
 let Actions = {
   SEND: "SEND",
   SEARCHMEMBER: "SEARCHMEMBER",
+  CREATEIM: "CREATEIM",
+  CREATECHATROOM: "CREATECHATROOM",
 };
 
 Dispatcher.register((action) => {
@@ -147,17 +174,64 @@ Dispatcher.register((action) => {
 
       break;
     case Actions.SEARCHMEMBER:
-      let keyword = action.keyword
-      FSBL.Clients.RouterClient.query(constants.symphonyServiceTopic, {
-        function: constants.symphonyQueryFunctionConfig.searchUsers,
-        query: keyword
-      }, (error, queryResponseMessage) => {
-        if (!error) {
-          let users = queryResponseMessage.data.users
-          SymphonyAdvanceShareStore.searchMemberResultList = users
-          SymphonyAdvanceShareStore.emit('searchMemberResultListChange')
+      let keyword = action.keyword;
+      FSBL.Clients.RouterClient.query(
+        constants.symphonyServiceTopic,
+        {
+          function: constants.symphonyQueryFunctionConfig.advSearchUsers,
+          local: false,
+          query: keyword,
+        },
+        (error, queryResponseMessage) => {
+          if (!error) {
+            let users = queryResponseMessage.data.users;
+            let connections = queryResponseMessage.data.connections;
+            SymphonyAdvanceShareStore.searchMemberResultList = users;
+            SymphonyAdvanceShareStore.connectionResultList = connections;
+            SymphonyAdvanceShareStore.emit("searchMemberResultListChange");
+          }
         }
-      });
+      );
+
+      break;
+    case Actions.CREATEIM:
+      let userIds = action.userIds;
+      FSBL.Clients.RouterClient.query(
+        constants.symphonyServiceTopic,
+        {
+          function: constants.symphonyQueryFunctionConfig.createIM,
+          userIDs: userIds,
+        },
+        (error, queryResponseMessage) => {
+          if (!error) {
+            SymphonyAdvanceShareStore.retrieveSymphonyStream();
+            SymphonyAdvanceShareStore.selectStreamId =
+              queryResponseMessage.data.id;
+            SymphonyAdvanceShareStore.emit("directChatCreated");
+          }
+        }
+      );
+
+      break;
+    case Actions.CREATECHATROOM:
+      let chatroomUserIds = action.userIds;
+      let chatroomName = action.chatroomName;
+      FSBL.Clients.RouterClient.query(
+        constants.symphonyServiceTopic,
+        {
+          function: constants.symphonyQueryFunctionConfig.createRoom,
+          chatroomName: chatroomName,
+          userIDs: chatroomUserIds,
+        },
+        (error, queryResponseMessage) => {
+          if (!error) {
+            SymphonyAdvanceShareStore.retrieveSymphonyStream();
+            console.log(queryResponseMessage)
+            SymphonyAdvanceShareStore.selectStreamId = queryResponseMessage.data.room.roomSystemInfo.id;
+            SymphonyAdvanceShareStore.emit("chatroomCreated");
+          }
+        }
+      );
 
       break;
   }

@@ -345,6 +345,27 @@ class SymphonyService extends Finsemble.baseService {
 								queryMessage.sendQueryResponse(null, result);
 							})
 						break;
+					case 'advSearchUsers':
+						let advSearchQuery = queryData.query
+						let advSearchLocal = queryData.local
+						let advSearchLocalStatus = 'PENDING_OUTGOING'
+						self.searchUsers(self.symphonyUserSessionToken, advSearchQuery, advSearchLocal)
+							.then((users) => {
+								self.listConnections(self.symphonyUserSessionToken, advSearchLocalStatus, "")
+									.then((connections) => {
+										queryMessage.sendQueryResponse(null, {
+											users: users,
+											connections: connections
+										});
+									})
+							})
+						break;
+
+					case "getSymphonyUserInfo":
+						queryMessage.sendQueryResponse(null, {
+							symphonyUserInfo: self.symphonyUserInfo
+						});
+						break;
 					default:
 						queryMessage.sendQueryResponse(null, 'Please specify symphony function');
 						break;
@@ -775,7 +796,7 @@ class SymphonyService extends Finsemble.baseService {
 						Finsemble.Clients.Logger.error("Failed to list user stream - userSession invalid", res);
 						self.getSymphonyUserSessionToken().then((token) => {
 							self.symphonyUserSessionToken = token.userSessionToken
-							self.listConnections(token.userSessionToken, userIDs)
+							self.listConnections(token.userSessionToken, status, userIDs)
 								.then((result) => {
 									resolve(result);
 								})

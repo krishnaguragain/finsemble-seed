@@ -14,7 +14,7 @@ export default class SymphonyAdvanceShareComponent extends React.Component {
     this.state = {
       sidList: [],
       sendBtnDisabled: true,
-      newDirectChatModalVisible: "block",
+      newDirectChatModalVisible: "none",
       newChatroomModalVisible: "none",
     };
     this.onSelectedSidListChange = this.onSelectedSidListChange.bind(this);
@@ -33,6 +33,13 @@ export default class SymphonyAdvanceShareComponent extends React.Component {
         sendBtnDisabled: false,
       });
     });
+    SymphonyAdvanceShareStore.on("directChatCreated", () => {
+      this.setState({ newDirectChatModalVisible: 'none' });
+    });
+    SymphonyAdvanceShareStore.on("chatroomCreated", () => {
+      this.setState({ newChatroomModalVisible: 'none' });
+    });
+    window.addEventListener("blur", this.cancelBtnOnClick)
   }
 
   componentDidUpdate(prevProps, prevState) {}
@@ -101,6 +108,7 @@ export default class SymphonyAdvanceShareComponent extends React.Component {
         <SymphonyChatList
           chatList={SymphonyAdvanceShareStore.streamList}
           onSidListChange={this.onSelectedSidListChange}
+          selectSid={SymphonyAdvanceShareStore.selectStreamId}
         />
         <button
           type="button"

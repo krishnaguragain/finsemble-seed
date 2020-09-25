@@ -299,7 +299,7 @@
                 "top": "center",
                 "left": "center",
                 "width": 250,
-                "height": 300
+                "height": 250
             },
             "component": {
                 "preload": false,
@@ -325,8 +325,13 @@
                         "launchableByUser": true
                     },
                     "Window Manager": {
+                        "alwaysOnTopIcon": false,
+                        "FSBLHeader": {
+                            "hideMaximize": true,
+                            "hideMinimize": true,
+                            "hideClose": true
+                        },
                         "title": "Share To Symphony",
-                        "FSBLHeader": false,
                         "persistWindowState": true
                     },
                     "Toolbar": {

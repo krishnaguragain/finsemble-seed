@@ -50,7 +50,6 @@ export default class SymphonySimpleShareComponent extends React.Component {
   render() {
     return (
       <div>
-        <h3>Share To Symphony</h3>
         <SymphonyShareMsgText shareMsg={SymphonySimpleShareStore.shareMsg} />
         <SymphonyChatList
           chatList={SymphonySimpleShareStore.streamList}
@@ -62,7 +61,7 @@ export default class SymphonySimpleShareComponent extends React.Component {
           onClick={this.sendBtnOnClick}
           disabled={this.state.sendBtnDisabled}
         >
-          Send
+          Share
         </button>
         <button type="button" id="cancelBtn" onClick={this.cancelBtnOnClick}>
           Cancel

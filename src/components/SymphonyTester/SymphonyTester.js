@@ -104,6 +104,7 @@ const FSBLReady = () => {
 		document.getElementById('oboMsgBtn').onclick = sendOboMsg
 
 		document.getElementById('simpleShareBtn').onclick = symphonyShare
+		document.getElementById('advanceShareBtn').onclick = symphonyShare
 
 
 
@@ -131,10 +132,15 @@ const FSBLReady = () => {
 }
 
 const symphonyShare = (e) => {
+	let target = 'SymphonySimpleShare'
+	if (e.target.id == 'advanceShareBtn') {
+		target = 'SymphonyAdvanceShare'
+	}
+
 	let msg = document.getElementById('oboMsg').value
 	if (msg != '') {
 		FSBL.Clients.LauncherClient.toggleWindowOnClick(document.getElementById('symphonyShareBtn'), {
-			componentType: 'SymphonySimpleShare'
+			componentType: target
 		}, {
 			data: {
 				shareMsg: msg
