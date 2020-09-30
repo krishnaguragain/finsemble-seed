@@ -1,5 +1,8 @@
 import React from "react";
-import { SymphonySimpleShareDispatcher, SymphonySimpleShareActions } from "../stores/SymphonySimpleShareStore";
+import {
+  SymphonySimpleShareDispatcher,
+  SymphonySimpleShareActions,
+} from "../stores/SymphonySimpleShareStore";
 import SymphonyShareMsgText from "./SymphonyShareMsgText";
 import SymphonyChatList from "./SymphonyChatList";
 
@@ -23,7 +26,7 @@ export default class SymphonySimpleShareComponent extends React.Component {
       });
     });
 
-    window.addEventListener("blur", this.cancelBtnOnClick)
+    window.addEventListener("blur", this.cancelBtnOnClick);
   }
 
   componentDidUpdate(prevProps, prevState) {}
@@ -34,11 +37,14 @@ export default class SymphonySimpleShareComponent extends React.Component {
     sidList.forEach((sid, key, arr) => {
       sids.push(sid);
     });
-    SymphonySimpleShareDispatcher.dispatch({ type: SymphonySimpleShareActions.SEND, sids: sids });
+    SymphonySimpleShareDispatcher.dispatch({
+      type: SymphonySimpleShareActions.SEND,
+      sids: sids,
+    });
   }
 
   cancelBtnOnClick() {
-    FSBL.Clients.WindowClient.close();
+    finsembleWindow.hide();
   }
 
   onSelectedSidListChange(sidList) {

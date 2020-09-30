@@ -1,0 +1,58 @@
+{
+  "comment": "Sample component configuration",
+  "components": {
+    "SymphonyAdvanceShare": {
+      "window": {
+        "url": "$applicationRoot/components/SymphonyAdvanceShare/SymphonyAdvanceShare.html",
+        "options": {
+          "resizable": true,
+          "autoShow": false,
+          "alwaysOnTop": true
+        },
+        "top": "center",
+        "left": "center",
+        "width": 300,
+        "height": 400
+      },
+      "component": {
+        "preload": false,
+        "spawnOnStartup": true,
+        "singleton": true,
+        "showDevConsoleOnVisible": false
+      },
+      "foreign": {
+        "services": {
+          "windowService": {
+            "manageWindowMovement": true,
+            "allowAutoArrange": true,
+            "allowSnapping": true,
+            "allowTabbing": false,
+            "allowTiling": false,
+            "allowGrouping": false,
+            "allowMinimize": false
+          },
+          "workspace": {}
+        },
+        "components": {
+          "App Launcher": {
+            "launchableByUser": true
+          },
+          "Window Manager": {
+            "alwaysOnTopIcon": false,
+            "FSBLHeader": {
+              "hideMaximize": true,
+              "hideMinimize": true,
+              "hideClose": true
+            },
+            "title": "Share To Symphony",
+            "persistWindowState": true
+          },
+          "Toolbar": {
+            "iconClass": "SymphonyAdvanceShare",
+            "iconURL": "http://localhost:3375/assets/img/Finsemble_Taskbar_Icon.png"
+          }
+        }
+      }
+    }
+  }
+}

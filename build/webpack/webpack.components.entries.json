@@ -3,10 +3,6 @@
         "output": "components/SymphonyTester/SymphonyTester",
         "entry": "./src/components/SymphonyTester/SymphonyTester.js"
     },
-    "SymphonyAdvanceSharer": {
-        "output": "components/SymphonyAdvanceSharer/SymphonyAdvanceSharer",
-        "entry": "./src/components/SymphonyAdvanceSharer/SymphonyAdvanceSharer.js"
-    },
     "SymphonySimpleShare": {
         "output": "components/SymphonySimpleShare/SymphonySimpleShare",
         "entry": "./src/components/SymphonySimpleShare/src/app.jsx"

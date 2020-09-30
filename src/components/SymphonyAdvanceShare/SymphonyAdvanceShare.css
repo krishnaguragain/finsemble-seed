@@ -10,6 +10,7 @@ body {
   user-select: none;
   background-color: var(--content-background-color);
   margin: 2px;
+    overflow-y: hidden;
 }
 
 h3 {
@@ -53,6 +54,7 @@ select {
   border-radius: 12px;
   background-color: var(--core-primary);
   color: var(--core-primary-4);
+  padding-left: 5px;
 }
 
 .chatLabel {
@@ -72,7 +74,7 @@ select {
 }
 
 #chatList {
-  width: 96%;
+  width: 95%;
   height: 190px;
   margin: 5px;
 }
@@ -86,10 +88,10 @@ select {
 /* Dropdown Button */
 .dropbtn {
   color: white;
-  font-size: 16px;
+  font-size: 20px;
   border: none;
-  border-radius: 50%;
-  margin-right: 5px;
+  border-radius: 45%;
+  margin-right: 10px;
 }
 
 /* The container <div> - needed to position the dropdown content */

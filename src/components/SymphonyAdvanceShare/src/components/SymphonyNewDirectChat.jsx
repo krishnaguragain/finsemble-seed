@@ -33,7 +33,13 @@ export default class SymphonyNewDirectChat extends React.Component {
 
   onMemberSearchTextInput(newValue) {
     if (newValue.length > 2) {
-      this.setState({ isLoading: true });
+      this.setState({
+        isLoading: true,
+        connectionState: {
+          status: "",
+          user: "",
+        },
+      });
       SymphonyAdvanceShareDispatcher.dispatch({
         type: SymphonyAdvanceShareActions.SEARCHMEMBER,
         keyword: newValue,
@@ -125,6 +131,8 @@ export default class SymphonyNewDirectChat extends React.Component {
             value={this.state.selectedMembers}
             isLoading={this.state.isLoading}
             isMulti
+            placeholder={"Input your search..."}
+            maxMenuHeight={150}
           />
           <SymphonyConnectionStatus
             connectionState={this.state.connectionState.status}

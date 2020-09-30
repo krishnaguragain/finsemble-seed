@@ -20,12 +20,14 @@ const constants = {
 
 var SymphonySimpleShareStore = assign({}, EventEmitter.prototype, {
   initialize: function () {
-    //Get Spawn data
-    var spawnData = FSBL.Clients.WindowClient.getSpawnData();
-    if (Object.keys(spawnData).length != 0) {
-      this.shareMsg = spawnData.shareMsg;
-      this.emit("change");
-    }
+    // Get Symphony message
+    FSBL.Clients.RouterClient.addListener("SymphonyMessage", (err, msg) => {
+      if (!err) {
+        console.log(msg.data);
+        this.shareMsg = msg.data;
+        this.emit("change");
+      }
+    });
 
     // retrieve symphony streams
     FSBL.Clients.RouterClient.query(
@@ -111,12 +113,12 @@ var SymphonySimpleShareStore = assign({}, EventEmitter.prototype, {
     );
   },
   streamList: [],
-  shareMsg: ""
+  shareMsg: "",
 });
 
 let Actions = {
-  SEND : 'SEND'
-}
+  SEND: "SEND",
+};
 
 Dispatcher.register((action) => {
   switch (action.type) {
@@ -161,4 +163,4 @@ if (window.FSBL && FSBL.addEventListener) {
 
 module.exports.Store = SymphonySimpleShareStore;
 module.exports.SymphonySimpleShareDispatcher = Dispatcher;
-module.exports.SymphonySimpleShareActions = Actions
+module.exports.SymphonySimpleShareActions = Actions;

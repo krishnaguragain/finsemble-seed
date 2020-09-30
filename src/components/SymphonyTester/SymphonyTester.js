@@ -142,14 +142,12 @@ const symphonyShare = (e) => {
 		FSBL.Clients.LauncherClient.toggleWindowOnClick(document.getElementById('symphonyShareBtn'), {
 			componentType: target
 		}, {
-			data: {
-				shareMsg: msg
-			},
 			addToWorkspace: false,
 			spawnIfNotFound: true,
 			top: e.screenY,
 			left: e.screenX
 		})
+		FSBL.Clients.RouterClient.transmit('SymphonyMessage', msg)
 	} else {
 		setDisplayMsg('Please input a message in the "Send OBO Message" textarea.', {})
 	}

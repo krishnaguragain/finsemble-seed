@@ -162,6 +162,9 @@
 		"$applicationRoot/configs/application/workspaces.json",
 		"$applicationRoot/configs/application/workspaceTemplates.json",
 		"$applicationRoot/configs/application/services.json",
-		"$applicationRoot/configs/application/securityPolicies.json"
+		"$applicationRoot/configs/application/securityPolicies.json",
+		"$applicationRoot/components/SymphonyTester/config.json",
+		"$applicationRoot/components/SymphonySimpleShare/config.json",
+		"$applicationRoot/components/SymphonyAdvanceShare/config.json"
 	]
 }

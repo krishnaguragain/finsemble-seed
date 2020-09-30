@@ -81,7 +81,7 @@ export default class SymphonyAdvanceShareComponent extends React.Component {
   }
 
   cancelBtnOnClick() {
-    FSBL.Clients.WindowClient.close();
+    finsembleWindow.hide();
   }
 
   onSelectedSidListChange(sidList) {
@@ -98,10 +98,10 @@ export default class SymphonyAdvanceShareComponent extends React.Component {
           <button className="dropbtn">+</button>
           <div className="dropdown-content">
             <a id="newDirectChatLink" onClick={this.newDirectChatOnClick}>
-              New direct chat
+              Direct Chat
             </a>
             <a id="newChatRoomLink" onClick={this.newChatRoomOnClick}>
-              New chat room
+              Chat Room
             </a>
           </div>
         </div>
@@ -116,7 +116,7 @@ export default class SymphonyAdvanceShareComponent extends React.Component {
           onClick={this.sendBtnOnClick}
           disabled={this.state.sendBtnDisabled}
         >
-          Send
+          Share
         </button>
         <button type="button" id="cancelBtn" onClick={this.cancelBtnOnClick}>
           Cancel

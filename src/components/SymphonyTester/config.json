@@ -1,0 +1,53 @@
+{
+  "comment": "Sample component configuration",
+  "components": {
+    "SymphonyTester": {
+      "window": {
+        "url": "$applicationRoot/components/SymphonyTester/SymphonyTester.html",
+        "options": {
+          "resizable": true,
+          "autoShow": true,
+          "alwaysOnTop": false
+        },
+        "top": "center",
+        "left": "center",
+        "width": 400,
+        "height": 600
+      },
+      "component": {
+        "preload": false,
+        "spawnOnStartup": false,
+        "singleton": false,
+        "showDevConsoleOnVisible": false
+      },
+      "foreign": {
+        "services": {
+          "windowService": {
+            "manageWindowMovement": true,
+            "allowAutoArrange": true,
+            "allowSnapping": true,
+            "allowTabbing": true,
+            "allowTiling": true,
+            "allowGrouping": true,
+            "allowMinimize": true
+          },
+          "workspace": {}
+        },
+        "components": {
+          "App Launcher": {
+            "launchableByUser": true
+          },
+          "Window Manager": {
+            "alwaysOnTopIcon": true,
+            "title": "SymphonyTester",
+            "persistWindowState": true
+          },
+          "Toolbar": {
+            "iconClass": "SymphonyTester",
+            "iconURL": "http://localhost:3375/assets/img/Finsemble_Taskbar_Icon.png"
+          }
+        }
+      }
+    }
+  }
+}

@@ -20,11 +20,13 @@ export default class SymphonyNewChatroom extends React.Component {
     this.onMemberValueChange = this.onMemberValueChange.bind(this);
     this.onMemberSearchTextInput = this.onMemberSearchTextInput.bind(this);
   }
+
   chatroomNameOnChange(e) {
     this.setState({
       chatroomName: e.target.value,
     });
   }
+
   componentDidMount() {
     let _this = this;
     SymphonyAdvanceShareStore.on("searchMemberResultListChange", () => {
@@ -43,7 +45,13 @@ export default class SymphonyNewChatroom extends React.Component {
 
   onMemberSearchTextInput(newValue) {
     if (newValue.length > 2) {
-      this.setState({ isLoading: true });
+      this.setState({
+        isLoading: true,
+        connectionState: {
+          status: "",
+          user: "",
+        },
+      });
       SymphonyAdvanceShareDispatcher.dispatch({
         type: SymphonyAdvanceShareActions.SEARCHMEMBER,
         keyword: newValue,
@@ -89,6 +97,7 @@ export default class SymphonyNewChatroom extends React.Component {
       this.setState({ selectedMembers: newValue });
     }
   }
+
   createBtnOnClick() {
     if (
       this.state.selectedMembers.length > 0 &&
@@ -105,6 +114,7 @@ export default class SymphonyNewChatroom extends React.Component {
       });
     }
   }
+
   render() {
     return (
       <div
@@ -145,6 +155,8 @@ export default class SymphonyNewChatroom extends React.Component {
             value={this.state.selectedMembers}
             isLoading={this.state.isLoading}
             isMulti
+            placeholder={"Input your search..."}
+            maxMenuHeight={150}
           />
           <SymphonyConnectionStatus
             connectionState={this.state.connectionState.status}

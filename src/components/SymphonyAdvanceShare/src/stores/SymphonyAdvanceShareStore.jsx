@@ -23,12 +23,13 @@ const constants = {
 
 var SymphonyAdvanceShareStore = assign({}, EventEmitter.prototype, {
   initialize: function () {
-    //Get Spawn data
-    var spawnData = FSBL.Clients.WindowClient.getSpawnData();
-    if (Object.keys(spawnData).length != 0) {
-      this.shareMsg = spawnData.shareMsg;
-      this.emit("change");
-    }
+    // Get Symphony message
+    FSBL.Clients.RouterClient.addListener("SymphonyMessage", (err, msg) => {
+      if (!err) {
+        this.shareMsg = msg.data;
+        this.emit("change");
+      }
+    });
 
     FSBL.Clients.RouterClient.query(
       constants.symphonyServiceTopic,

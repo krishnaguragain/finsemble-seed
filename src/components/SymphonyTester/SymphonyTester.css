@@ -66,6 +66,7 @@ select {
   border-radius: 12px;
   background-color: var(--core-primary);
   color: var(--core-primary-4);
+  padding-left: 5px;
 }
 
 #quitFS {
@@ -142,11 +143,12 @@ select {
 }
 
 #oboMsg {
-  width: 100%;
+  width: 97%;
   height: 40px;
   border-radius: 12px;
   background-color: var(--core-primary);
   color: var(--core-primary-4);
+  padding-left: 5px;
 }
 
 .accordion {
@@ -163,7 +165,7 @@ select {
   font-size: 15px;
   transition: 0.4s;
   border-radius: 5px;
-  padding-left: 0px;
+  padding-left: 5px;
   padding-right: 0px;
   margin-left: 0px;
   margin-top: 15px;
