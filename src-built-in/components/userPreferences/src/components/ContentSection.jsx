@@ -1,10 +1,13 @@
 import React from 'react';
 import General from './content/General';
 import Workspaces from './content/Workspaces';
+import Preferences
+	from "../../../../../src/components/finsemble-notifications/components/shared/components/Preferences";
 
 let content = {
 	general: General,
-	workspaces: Workspaces
+	workspaces: Workspaces,
+	notifications: Preferences
 }
 export default class ContentSection extends React.Component {
 	constructor(props) {

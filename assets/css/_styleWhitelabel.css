@@ -1,1 +1,12 @@
 /* Use this file to paste-in classes that you want to modify.*/
+
+
+/* Define styles for Notification preferences panel */
+.user-preferences .mute-filter {
+	margin-bottom: 5px;
+	display: flex;
+}
+
+.user-preferences .mute-filter span {
+	width: 100%;
+}

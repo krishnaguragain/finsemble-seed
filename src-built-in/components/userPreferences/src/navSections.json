@@ -7,6 +7,10 @@
         {
             "name": "workspaces",
             "label": "Workspaces"
+        },
+        {
+            "name": "notifications",
+            "label": "Notifications"
         }
     ]
 }
