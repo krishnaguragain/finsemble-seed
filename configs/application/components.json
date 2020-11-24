@@ -11,15 +11,24 @@
 					"autoShow": true,
 					"alwaysOnTop": false
 				},
+				"data": {
+					"autoShutdown": {}
+				},
 				"top": "center",
 				"left": "center",
 				"width": 400,
 				"height": 432
 			},
+			"custom": {
+				"autoShutdown": "00 * * * * *"
+			},
 			"component": {
 				"displayName": "Welcome Component",
 				"spawnOnStartup": false,
-				"preload": "$applicationRoot/preloads/zoom.js"
+				"preload": [
+					"$applicationRoot/preloads/zoom.js",
+					"$applicationRoot/preloads/autoComponentShutdown.js"
+				]
 			},
 			"foreign": {
 				"services": {
