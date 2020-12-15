@@ -2,6 +2,50 @@
 	"comment": "Sample component configuration",
 	"$schema": "../../node_modules/@finsemble/finsemble-core/configs/schemas/fileBasedSchemas/componentsFile.schema.json",
 	"components": {
+		"Yahoo": {
+			"window": {
+				"url": "https://uk.finance.yahoo.com/quote/AAP",
+				"options": {
+					"resizable": true,
+					"autoShow": true,
+					"alwaysOnTop": false
+				},
+				"top": "center",
+				"left": "center",
+				"width": 400,
+				"height": 432
+			},
+			"component": {
+				"displayName": "Yahoo Finance",
+				"spawnOnStartup": false,
+				"preload": "$applicationRoot/preloads/yahooFinance.js"
+			},
+			"foreign": {
+				"services": {
+					"windowService": {
+						"allowSnapping": true,
+						"allowGrouping": true,
+						"allowAutoArrange": true,
+						"allowMinimize": true
+					}
+				},
+				"components": {
+					"App Launcher": {
+						"launchableByUser": true
+					},
+					"Window Manager": {
+						"alwaysOnTopIcon": false,
+						"showLinker": true,
+						"FSBLHeader": true,
+						"persistWindowState": true,
+						"title": "YHF"
+					},
+					"Toolbar": {
+						"iconClass": "ff-component"
+					}
+				}
+			}
+		},
 		"Welcome Component": {
 			"window": {
 				"url": "$applicationRoot/components/welcome/welcome.html",

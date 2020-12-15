@@ -6,5 +6,9 @@
 	"zoom": {
 		"output": "preloads/zoom",
 		"entry": "./src/preloads/zoom.js"
+	},
+	"yahooFinance": {
+		"output": "preloads/yahooFinance",
+		"entry": "./src/preloads/yahooFinance.js"
 	}
 }
