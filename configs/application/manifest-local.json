@@ -69,7 +69,8 @@
 			}
 		},
 		"custom": {
-			"//": "Customer macros definitions must go here (e.g. 'myApplicationRoot' so it can be referenced elsewhere as '$myApplicationRoot'), along with other custom config at this level."
+			"//": "Customer macros definitions must go here (e.g. 'myApplicationRoot' so it can be referenced elsewhere as '$myApplicationRoot'), along with other custom config at this level.",
+			"myAuthServer": ""
 		},
 		"importConfig": ["$applicationRoot/configs/application/config.json"]
 	},

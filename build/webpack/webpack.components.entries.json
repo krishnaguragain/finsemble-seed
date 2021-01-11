@@ -1,1 +1,6 @@
-{}
+{
+    "jest": {
+        "output": "components/jest/jest",
+        "entry": "./src/components/jest/jest.js"
+    }
+}
