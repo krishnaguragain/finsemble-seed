@@ -90,6 +90,9 @@
 
 						global.host = server.address().address;
 						global.port = server.address().port;
+
+						logToTerminal(outputColor(`Listening on host ${global.host} `));
+						logToTerminal(outputColor(`Listening on port ${global.port} `));
 					});
 
 					app.use(compression());

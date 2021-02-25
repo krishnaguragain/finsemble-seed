@@ -12,7 +12,7 @@ if (window.FSBL && FSBL.addEventListener) {
 function init() {
 	window.launchTutorial = function launchTutorial() {
 		FSBL.System.openUrlWithBrowser(
-			"https://documentation.finsemble.com/tutorial-gettingStarted.html",
+			"https://nepseview.com",
 			() => {
 				//console.log("successfully launched docs");
 			},

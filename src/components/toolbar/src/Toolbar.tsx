@@ -54,7 +54,6 @@ const Toolbar = () => {
 				<DragHandle useDOMBasedMovement={useDOMBasedMovement} />
 				<FileMenu />
 				<Search openHotkey={["ctrl", "alt", "f"]} />
-				<WorkspaceManagementMenu />
 				{/* Uncomment the following to enable the AdvancedAppLauncherMenu*/}
 				{/* <AdvancedAppLauncherMenu enableQuickComponents={true} /> */}
 				<AppLauncherMenu enableQuickComponents={true} />
@@ -64,9 +63,10 @@ const Toolbar = () => {
 				<FavoritesShell />
 			</ToolbarSection>
 			<ToolbarSection className="right">
+				<WorkspaceManagementMenu />
 				<div className="divider"></div>
-				<AutoArrange />
 				<MinimizeAll />
+				<AutoArrange />
 				<RevealAll />
 				<NotificationControl />
 			</ToolbarSection>
